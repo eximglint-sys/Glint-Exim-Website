@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glint Exim - Premium Import & Export | Gemstones, Jewellery, Furniture & Spices</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header class="header">
+        <div class="top-bar">
+            <div class="container">
+                <div class="top-bar-content">
+                    <div class="contact-info">
+                        <span><i class="fas fa-map-marker-alt"></i> A 1603, 16th Floor, Heritage One, Meda Was Road, Sector 62, Ullawas Village</span>
+                        <span><i class="fas fa-envelope"></i> glintexim@gmail.com</span>
+                        <span><i class="fas fa-phone"></i> +91 80767 02201</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-wrapper">
+                    <div class="logo">
+                        <h1>Glint Exim</h1>
+                        <p class="tagline">25+ Years of Excellence</p>
+                    </div>
+                    <ul class="nav-menu">
+                        <li><a href="#home" class="active">Home</a></li>
+                        <li class="dropdown">
+                            <a href="#about">About <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#about">Company</a></li>
+                                <li><a href="#testimonials">Testimonials</a></li>
+                                <li><a href="#about">Why Choose Us</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#services">Services</a></li>
+                        <li class="dropdown">
+                            <a href="#products">Products <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#products">Gemstones</a></li>
+                                <li><a href="#products">Jewellery</a></li>
+                                <li><a href="#products">Furniture</a></li>
+                                <li><a href="#products">Beds & Tables</a></li>
+                                <li><a href="#products">Indian Spices</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                    <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-slider">
+            <div class="hero-slide active" style="background: linear-gradient(rgba(10, 17, 40, 0.7), rgba(10, 17, 40, 0.7)), url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&q=80') center/cover no-repeat;">
+                <div class="container">
+                    <div class="hero-content">
+                        <h2 class="hero-title">Welcome To Glint Exim</h2>
+                        <p class="hero-subtitle">Your Trusted Partner in Global Trade</p>
+                        <p class="hero-text">25+ Years of Excellence in Import & Export</p>
+                        <button class="btn btn-primary" onclick="window.location.href='contact.html'">Contact Us</button>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-slide" style="background: linear-gradient(rgba(10, 17, 40, 0.6), rgba(10, 17, 40, 0.6)), url('https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=1920&q=80') center/cover no-repeat;">
+                <div class="container">
+                    <div class="hero-content">
+                        <h2 class="hero-title">Premium Gemstones & Jewellery</h2>
+                        <p class="hero-subtitle">Exquisite Collection from Around the World</p>
+                        <p class="hero-text">Quality You Can Trust</p>
+                        <button class="btn btn-primary" onclick="document.getElementById('products').scrollIntoView({behavior: 'smooth'})">View Products</button>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-slide" style="background: linear-gradient(rgba(10, 17, 40, 0.6), rgba(10, 17, 40, 0.6)), url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1920&q=80') center/cover no-repeat;">
+                <div class="container">
+                    <div class="hero-content">
+                        <h2 class="hero-title">Luxury Furniture Collection</h2>
+                        <p class="hero-subtitle">Beds, Tables & Premium Furniture</p>
+                        <p class="hero-text">Crafted to Perfection</p>
+                        <button class="btn btn-primary" onclick="document.getElementById('products').scrollIntoView({behavior: 'smooth'})">Explore More</button>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-slide" style="background: linear-gradient(rgba(10, 17, 40, 0.6), rgba(10, 17, 40, 0.6)), url('https://images.unsplash.com/photo-1506368249639-73a05d6f6488?w=1920&q=80') center/cover no-repeat;">
+                <div class="container">
+                    <div class="hero-content">
+                        <h2 class="hero-title">Authentic Indian Spices</h2>
+                        <p class="hero-subtitle">Rich Flavors from India</p>
+                        <p class="hero-text">Pure & Natural</p>
+                        <button class="btn btn-primary" onclick="document.getElementById('products').scrollIntoView({behavior: 'smooth'})">Discover Spices</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="hero-prev" aria-label="Previous slide"><i class="fas fa-chevron-left"></i></button>
+        <button class="hero-next" aria-label="Next slide"><i class="fas fa-chevron-right"></i></button>
+        <div class="hero-indicators"></div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">About Glint Exim</h2>
+                <div class="title-underline"></div>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Welcome to Glint Exim</h3>
+                    <p class="highlight">With over 25 years of excellence in international trade, Glint Exim has established itself as a trusted name in import and export business.</p>
+                    <p>We specialize in sourcing and supplying premium quality gemstones, exquisite jewellery, luxurious furniture, and authentic Indian spices to clients worldwide. Our commitment to quality, reliability, and customer satisfaction has helped us build long-lasting relationships with partners across the globe.</p>
+                    <p>At Glint Exim, we understand the importance of quality and timely delivery in today's competitive international business environment. Our experienced team ensures that every product meets the highest standards and reaches you on time, every time.</p>
+                    <div class="about-features">
+                        <div class="feature-item">
+                            <i class="fas fa-award"></i>
+                            <h4>25+ Years Experience</h4>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-globe"></i>
+                            <h4>Global Network</h4>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <h4>Quality Assured</h4>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-handshake"></i>
+                            <h4>Trusted Partner</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">What We Do</h2>
+                <div class="title-underline"></div>
+                <p class="section-subtitle">Comprehensive Import & Export Solutions</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-box-open"></i>
+                    </div>
+                    <h3>Import Services</h3>
+                    <p>We help international companies introduce their premium products to global markets and connect them with reliable partners.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Sourcing Agent</h3>
+                    <p>We work as your local partner to source the best quality products as per your requirements and specifications.</p>
+                </div>
+                    
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Products</h2>
+                <div class="title-underline"></div>
+                <p class="section-subtitle">Premium Quality Products for Global Markets</p>
+            </div>
+            <div class="products-grid">
+                <a href="gemstones.html" class="product-card product-card-clickable">
+                    <div class="product-image" style="background: linear-gradient(rgba(10, 17, 40, 0.3), rgba(10, 17, 40, 0.3)), url('https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?w=800&q=80') center/cover no-repeat;">
+                        <div class="product-overlay">
+                            <i class="fas fa-gem"></i>
+                        </div>
+                        <div class="product-badge">View Collection</div>
+                    </div>
+                    <div class="product-content">
+                        <h3>Gemstones <i class="fas fa-arrow-right"></i></h3>
+                        <p>Premium quality gemstones sourced from trusted mines. Discover our complete collection of precious and semi-precious stones including diamonds, rubies, sapphires, emeralds, and more.</p>
+                        <ul class="product-features">
+                            <li><i class="fas fa-check"></i> IGI Certified Quality</li>
+                            <li><i class="fas fa-check"></i> 8+ Varieties Available</li>
+                            <li><i class="fas fa-check"></i> Spiritual Properties Info</li>
+                        </ul>
+                        <div class="learn-more-btn">
+                            <span>Learn More About Gemstones</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                    </div>
+                </a>
+                <div class="product-card">
+                    <div class="product-image" style="background: linear-gradient(rgba(10, 17, 40, 0.3), rgba(10, 17, 40, 0.3)), url('https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=800&q=80') center/cover no-repeat;">
+                        <div class="product-overlay">
+                            <i class="fas fa-ring"></i>
+                        </div>
+                    </div>
+                    <div class="product-content">
+                        <h3>Jewellery</h3>
+                        <p>Exquisite collection of jewellery including traditional, contemporary, and custom designs. From gold and silver to diamond and platinum pieces.</p>
+                        <ul class="product-features">
+                            <li><i class="fas fa-check"></i> Handcrafted Excellence</li>
+                            <li><i class="fas fa-check"></i> Custom Designs</li>
+                            <li><i class="fas fa-check"></i> Global Standards</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image" style="background: linear-gradient(rgba(10, 17, 40, 0.3), rgba(10, 17, 40, 0.3)), url('https://images.unsplash.com/photo-1540574163026-643ea20ade25?w=800&q=80') center/cover no-repeat;">
+                        <div class="product-overlay">
+                            <i class="fas fa-bed"></i>
+                        </div>
+                    </div>
+                    <div class="product-content">
+                        <h3>Beds & Furniture</h3>
+                        <p>Luxury furniture collection including premium beds, elegant tables, and complete furniture solutions. Crafted with finest materials and superior craftsmanship.</p>
+                        <ul class="product-features">
+                            <li><i class="fas fa-check"></i> Premium Quality</li>
+                            <li><i class="fas fa-check"></i> Modern Designs</li>
+                            <li><i class="fas fa-check"></i> Durable Materials</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image" style="background: linear-gradient(rgba(10, 17, 40, 0.3), rgba(10, 17, 40, 0.3)), url('https://images.unsplash.com/photo-1506368249639-73a05d6f6488?w=800&q=80') center/cover no-repeat;">
+                        <div class="product-overlay">
+                            <i class="fas fa-pepper-hot"></i>
+                        </div>
+                    </div>
+                    <div class="product-content">
+                        <h3>Indian Spices</h3>
+                        <p>Authentic Indian spices including turmeric, cardamom, black pepper, cumin, coriander, and specialty spice blends. Pure, natural, and aromatic.</p>
+                        <ul class="product-features">
+                            <li><i class="fas fa-check"></i> 100% Pure & Natural</li>
+                            <li><i class="fas fa-check"></i> Farm Fresh</li>
+                            <li><i class="fas fa-check"></i> Export Quality</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image" style="background: linear-gradient(rgba(10, 17, 40, 0.3), rgba(10, 17, 40, 0.3)), url('https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=800&q=80') center/cover no-repeat;">
+                        <div class="product-overlay">
+                            <i class="fas fa-chair"></i>
+                        </div>
+                    </div>
+                    <div class="product-content">
+                        <h3>Tables</h3>
+                        <p>Elegant dining tables, coffee tables, study tables, and conference tables. Available in various materials including wood, glass, and marble.</p>
+                        <ul class="product-features">
+                            <li><i class="fas fa-check"></i> Various Designs</li>
+                            <li><i class="fas fa-check"></i> Quality Materials</li>
+                            <li><i class="fas fa-check"></i> Custom Sizes</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image" style="background: linear-gradient(rgba(10, 17, 40, 0.3), rgba(10, 17, 40, 0.3)), url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80') center/cover no-repeat;">
+                        <div class="product-overlay">
+                            <i class="fas fa-couch"></i>
+                        </div>
+                    </div>
+                    <div class="product-content">
+                        <h3>Complete Furniture</h3>
+                        <p>Comprehensive furniture solutions for homes and offices. Sofas, wardrobes, cabinets, shelving units, and complete interior furnishing.</p>
+                        <ul class="product-features">
+                            <li><i class="fas fa-check"></i> Complete Solutions</li>
+                            <li><i class="fas fa-check"></i> Professional Design</li>
+                            <li><i class="fas fa-check"></i> Customizable</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Business Gallery</h2>
+                <div class="title-underline"></div>
+                <p class="section-subtitle">Glimpses of Our Premium Products</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item" style="background: linear-gradient(rgba(10, 17, 40, 0.5), rgba(10, 17, 40, 0.5)), url('https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?w=600&q=80') center/cover no-repeat;">
+                    <i class="fas fa-gem"></i>
+                    <p>Gemstones Collection</p>
+                </div>
+                <div class="gallery-item" style="background: linear-gradient(rgba(10, 17, 40, 0.5), rgba(10, 17, 40, 0.5)), url('https://images.unsplash.com/photo-1611652022419-a9419f74343b?w=600&q=80') center/cover no-repeat;">
+                    <i class="fas fa-ring"></i>
+                    <p>Jewellery Designs</p>
+                </div>
+                <div class="gallery-item" style="background: linear-gradient(rgba(10, 17, 40, 0.5), rgba(10, 17, 40, 0.5)), url('https://images.unsplash.com/photo-1540574163026-643ea20ade25?w=600&q=80') center/cover no-repeat;">
+                    <i class="fas fa-bed"></i>
+                    <p>Luxury Beds</p>
+                </div>
+                <div class="gallery-item" style="background: linear-gradient(rgba(10, 17, 40, 0.5), rgba(10, 17, 40, 0.5)), url('https://images.unsplash.com/photo-1506368249639-73a05d6f6488?w=600&q=80') center/cover no-repeat;">
+                    <i class="fas fa-pepper-hot"></i>
+                    <p>Indian Spices</p>
+                </div>
+                <div class="gallery-item" style="background: linear-gradient(rgba(10, 17, 40, 0.5), rgba(10, 17, 40, 0.5)), url('https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=600&q=80') center/cover no-repeat;">
+                    <i class="fas fa-chair"></i>
+                    <p>Designer Tables</p>
+                </div>
+                <div class="gallery-item" style="background: linear-gradient(rgba(10, 17, 40, 0.5), rgba(10, 17, 40, 0.5)), url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=600&q=80') center/cover no-repeat;">
+                    <i class="fas fa-couch"></i>
+                    <p>Furniture Range</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3 class="stat-number" data-target="25">0</h3>
+                    <p>Years of Excellence</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="stat-number" data-target="500">0</h3>
+                    <p>Happy Clients</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-globe-americas"></i>
+                    </div>
+                    <h3 class="stat-number" data-target="50">0</h3>
+                    <p>Countries Served</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-box"></i>
+                    </div>
+                    <h3 class="stat-number" data-target="10000">0</h3>
+                    <p>Products Exported</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-choose-us">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Why Choose Glint Exim</h2>
+                <div class="title-underline"></div>
+            </div>
+            <div class="reasons-grid">
+                <div class="reason-card">
+                    <i class="fas fa-handshake"></i>
+                    <h3>We Build Relations</h3>
+                    <p>Long-term partnerships based on trust and mutual growth</p>
+                </div>
+                <div class="reason-card">
+                    <i class="fas fa-user-tie"></i>
+                    <h3>25+ Years Experience</h3>
+                    <p>Quarter century of expertise in international trade</p>
+                </div>
+                <div class="reason-card">
+                    <i class="fas fa-star"></i>
+                    <h3>Premium Quality</h3>
+                    <p>Only the finest products that meet international standards</p>
+                </div>
+                <div class="reason-card">
+                    <i class="fas fa-clock"></i>
+                    <h3>On-Time Delivery</h3>
+                    <p>Reliable logistics ensuring timely delivery worldwide</p>
+                </div>
+                <div class="reason-card">
+                    <i class="fas fa-dollar-sign"></i>
+                    <h3>Competitive Pricing</h3>
+                    <p>Best value for money without compromising on quality</p>
+                </div>
+                <div class="reason-card">
+                    <i class="fas fa-smile"></i>
+                    <h3>100% Satisfaction</h3>
+                    <p>Committed to exceeding customer expectations</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section class="certifications">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Certifications & Memberships</h2>
+                <div class="title-underline"></div>
+                <p class="section-subtitle">Trusted Quality & Standards</p>
+            </div>
+            <div class="certifications-grid">
+                <div class="certification-card">
+                    <div class="cert-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3>ISO Certified</h3>
+                    <p>International quality standards compliance</p>
+                </div>
+                <div class="certification-card">
+                    <div class="cert-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3>Export Excellence</h3>
+                    <p>Recognized for outstanding export performance</p>
+                </div>
+                <div class="certification-card">
+                    <div class="cert-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Quality Assured</h3>
+                    <p>Certified product quality standards</p>
+                </div>
+                <div class="certification-card">
+                    <div class="cert-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Trade Member</h3>
+                    <p>Member of international trade associations</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Client Testimonials</h2>
+                <div class="title-underline"></div>
+                <p class="section-subtitle">What Our Clients Say About Us</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>John Smith</h4>
+                            <p>United States</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">Outstanding service! Glint Exim has been our trusted supplier for gemstones and jewellery for over 5 years. Their quality and professionalism are unmatched.</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>United Kingdom</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">The furniture quality is exceptional! We've furnished multiple hotels with Glint Exim's products. Their beds and tables are both elegant and durable.</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>Mohammed Al-Rashid</h4>
+                            <p>UAE</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">Best Indian spices supplier! The quality and aroma of their spices are authentic. Timely delivery and excellent customer support make them our preferred partner.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About Glint Exim</h3>
+                    <p>With 25+ years of excellence in import and export, Glint Exim is your trusted partner for premium gemstones, jewellery, furniture, and Indian spices.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Our Products</h3>
+                    <ul>
+                        <li><a href="#products">Gemstones</a></li>
+                        <li><a href="#products">Jewellery</a></li>
+                        <li><a href="#products">Furniture</a></li>
+                        <li><a href="#products">Indian Spices</a></li>
+                        <li><a href="#products">Beds & Tables</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <ul class="contact-list">
+                        <li><i class="fas fa-map-marker-alt"></i> A 1603, 16th Floor, Heritage One, Meda Was Road, Sector 62, Ullawas Village</li>
+                        <li><i class="fas fa-phone"></i> +91 8076702201</li>
+                        <li><i class="fas fa-envelope"></i> glintexim@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Glint Exim. All Rights Reserved. | Powered by 25+ Years of Excellence</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/+918076702201" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp" title="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
