@@ -1991,6 +1991,45 @@ section {
     box-shadow: var(--shadow);
 }
 
+.form-status {
+    display: none;
+    padding: 14px 16px;
+    border-radius: 12px;
+    margin-bottom: 18px;
+    font-weight: 600;
+    line-height: 1.4;
+    border: 1px solid transparent;
+}
+
+.form-status.is-loading,
+.form-status.is-success,
+.form-status.is-error {
+    display: block;
+}
+
+.form-status.is-loading {
+    background: rgba(10, 17, 40, 0.06);
+    border-color: rgba(10, 17, 40, 0.15);
+    color: var(--navy);
+}
+
+.form-status.is-success {
+    background: rgba(34, 197, 94, 0.12);
+    border-color: rgba(34, 197, 94, 0.35);
+    color: #166534;
+}
+
+.form-status.is-error {
+    background: rgba(239, 68, 68, 0.12);
+    border-color: rgba(239, 68, 68, 0.35);
+    color: #991b1b;
+}
+
+#contactSubmitBtn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
 .form-select {
     padding: 12px 15px;
     border: 2px solid #e2e8f0;

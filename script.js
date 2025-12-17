@@ -170,8 +170,6 @@ if (scrollToTopBtn) {
 const contactForm = document.getElementById('contactForm');
 
 if (contactForm) {
-    // If the form has an action (e.g., Formspree), let the browser submit normally.
-    // Otherwise, fall back to demo behavior.
     const action = (contactForm.getAttribute('action') || '').trim();
     if (!action) {
         contactForm.addEventListener('submit', (e) => {
@@ -180,11 +178,50 @@ if (contactForm) {
             contactForm.reset();
         });
     } else {
-        // For Formspree: set reply-to from the Email field so replies go to the customer.
-        contactForm.addEventListener('submit', () => {
+        // AJAX submit to Formspree so we stay on the same page (no redirect).
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const statusEl = document.getElementById('formStatus');
+            const submitBtn = document.getElementById('contactSubmitBtn');
             const emailInput = contactForm.querySelector('input[name="email"]');
             const replyToHidden = contactForm.querySelector('#replytoHidden');
             if (emailInput && replyToHidden) replyToHidden.value = emailInput.value || '';
+
+            if (statusEl) {
+                statusEl.className = 'form-status is-loading';
+                statusEl.textContent = 'Sending...';
+            }
+            if (submitBtn) submitBtn.disabled = true;
+
+            try {
+                const formData = new FormData(contactForm);
+                const res = await fetch(action, {
+                    method: 'POST',
+                    headers: { 'Accept': 'application/json' },
+                    body: formData,
+                });
+
+                if (res.ok) {
+                    contactForm.reset();
+                    if (statusEl) {
+                        statusEl.className = 'form-status is-success';
+                        statusEl.textContent = 'Thank you! Your message has been sent. We will contact you soon.';
+                    }
+                } else {
+                    if (statusEl) {
+                        statusEl.className = 'form-status is-error';
+                        statusEl.textContent = 'Sorry, something went wrong. Please try again or email us directly.';
+                    }
+                }
+            } catch (err) {
+                if (statusEl) {
+                    statusEl.className = 'form-status is-error';
+                    statusEl.textContent = 'Network error. Please try again or email us directly.';
+                }
+            } finally {
+                if (submitBtn) submitBtn.disabled = false;
+            }
         });
     }
 }
