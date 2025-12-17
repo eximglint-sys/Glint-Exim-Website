@@ -10,18 +10,6 @@
 <body>
     <!-- Header & Navigation -->
     <header class="header">
-        <div class="top-bar">
-            <div class="container">
-                <div class="top-bar-content">
-                    <div class="contact-info">
-                        <span><i class="fas fa-map-marker-alt"></i> A 1603, 16th Floor, Heritage One, Meda Was Road, Sector 62, Ullawas Village</span>
-                        <span><i class="fas fa-envelope"></i> glintexim@gmail.com</span>
-                        <span><i class="fas fa-phone"></i> +91 80767 02201</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
         <nav class="navbar">
             <div class="container">
                 <div class="nav-wrapper">
@@ -98,7 +86,7 @@
                     </div>
                     <h3>Email Address</h3>
                     <p><strong>General Inquiries:</strong></p>
-                    <p>glintexim@gmail.com</p>
+                    <p><a href="https://mail.google.com/mail/?view=cm&fs=1&to=glintexim@gmail.com" target="_blank" rel="noopener">glintexim@gmail.com</a></p>
                     
         </div>
     </section>
@@ -111,7 +99,10 @@
                     <h2>Send Us A Message</h2>
                     <p class="form-description">Fill out the form below and we'll get back to you within 24 hours. For urgent inquiries, please call us directly or message us on WhatsApp.</p>
                     
-                    <form class="contact-form-main" id="contactForm">
+                    <!-- To receive form submissions on your email, create a Formspree form and paste the URL below. -->
+                    <form class="contact-form-main" id="contactForm" action="https://formspree.io/f/xnneevqw" method="POST">
+                        <input type="hidden" name="_subject" value="New inquiry from Glint Exim website">
+                        <input type="hidden" name="_replyto" id="replytoHidden" value="">
                         <div class="form-group">
                             <label for="name">Full Name *</label>
                             <input type="text" id="name" name="name" placeholder="Enter your full name" required>
@@ -185,7 +176,7 @@
                             <a href="tel:[PHONE_NUMBER]" class="quick-btn call-btn">
                                 <i class="fas fa-phone"></i> Call Now
                             </a>
-                            <a href="mailto:info@glintexim.com" class="quick-btn email-btn">
+                            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=glintexim@gmail.com" class="quick-btn email-btn" target="_blank" rel="noopener">
                                 <i class="fas fa-envelope"></i> Email Us
                             </a>
                         </div>
@@ -244,11 +235,9 @@
                 <div class="footer-section">
                     <h3>Contact Info</h3>
                     <ul class="contact-list">
-                        <li><i class="fas fa-map-marker-alt"></i> A 1603, 16th Floor, Heritage One, Meda Was Road, Sector 62, Ullawas Village</p>
-                            <p>Gurugram, Haryana- 122001</p>
-                            <p>India</p><li
+                        <li><i class="fas fa-map-marker-alt"></i> A 1603, 16th Floor, Heritage One, Meda Was Road, Sector 62, Ullawas Village<br>Gurugram, Haryana - 122001<br>India</li>
                         <li><i class="fas fa-phone"></i> +91 8076702201</li>
-                        <li><i class="fas fa-envelope"></i> glintexim@gmail.com</li>
+                        <li><i class="fas fa-envelope"></i> <a href="https://mail.google.com/mail/?view=cm&fs=1&to=glintexim@gmail.com" target="_blank" rel="noopener">glintexim@gmail.com</a></li>
                     </ul>
                 </div>
             </div>

@@ -170,25 +170,23 @@ if (scrollToTopBtn) {
 const contactForm = document.getElementById('contactForm');
 
 if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        // Get form data
-        const formData = new FormData(contactForm);
-        const data = {};
-        formData.forEach((value, key) => {
-            data[key] = value;
+    // If the form has an action (e.g., Formspree), let the browser submit normally.
+    // Otherwise, fall back to demo behavior.
+    const action = (contactForm.getAttribute('action') || '').trim();
+    if (!action) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for contacting us! We will get back to you soon.');
+            contactForm.reset();
         });
-        
-        // Here you would typically send the data to a server
-        console.log('Form submitted:', data);
-        
-        // Show success message
-        alert('Thank you for contacting us! We will get back to you soon.');
-        
-        // Reset form
-        contactForm.reset();
-    });
+    } else {
+        // For Formspree: set reply-to from the Email field so replies go to the customer.
+        contactForm.addEventListener('submit', () => {
+            const emailInput = contactForm.querySelector('input[name="email"]');
+            const replyToHidden = contactForm.querySelector('#replytoHidden');
+            if (emailInput && replyToHidden) replyToHidden.value = emailInput.value || '';
+        });
+    }
 }
 
 // Smooth Scroll for all anchor links
