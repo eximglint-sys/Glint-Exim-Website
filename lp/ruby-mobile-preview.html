@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Ruby - Mobile Single File Preview | Glint Exim</title>
+    <!-- External icon & font CDNs (these load from internet, everything else is inside this file) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Inline styles copied from ruby-styles.css (only Ruby products page part) -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .ruby-page {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #fafafa;
+            color: #1a1a1a;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .products-nav {
+            height: 64px;
+            padding: 0 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #ffffff;
+            border-bottom: 1px solid #f0f0f0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .back-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 999px;
+            border: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            cursor: pointer;
+        }
+
+        .back-btn i {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .products-nav h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .user-name {
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* Products page layout */
+        .products-section {
+            padding: 10px 0 90px;
+        }
+
+        .container-ruby {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .products-header {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .products-header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .products-header p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .products-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .product-card-ruby {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            max-width: 100%;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #f0f0f0;
+        }
+
+        .product-image-wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 55%;
+            background: #f5f5f5;
+            overflow: hidden;
+        }
+
+        .product-image-ruby {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #8b0000;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .product-info-ruby {
+            padding: 20px;
+        }
+
+        .product-name-ruby {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .product-subtitle {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 12px;
+        }
+
+        .product-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 10px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .product-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .product-meta i {
+            color: #8b0000;
+        }
+
+        .product-quality-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 18px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            font-size: 13px;
+            color: #555;
+        }
+
+        .product-quality-list li {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .product-quality-list i {
+            color: #0f9d58;
+            font-size: 13px;
+        }
+
+        .product-price-ruby {
+            margin-bottom: 16px;
+        }
+
+        .price-label {
+            font-size: 24px;
+            font-weight: 700;
+            color: #8b0000;
+        }
+
+        .price-unit {
+            font-size: 13px;
+            color: #666;
+            margin-left: 5px;
+        }
+
+        .product-quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .qty-btn-small {
+            width: 36px;
+            height: 36px;
+            border: 1px solid #e0e0e0;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .qty-input-small {
+            width: 50px;
+            height: 36px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            background: #f9f9f9;
+        }
+
+        /* Cart summary bar */
+        .cart-summary-bar {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #ffffff;
+            border-top: 1px solid #f0f0f0;
+            padding: 10px 16px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cart-summary-content {
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .cart-info {
+            display: flex;
+            flex-direction: column;
+            font-size: 13px;
+        }
+
+        .cart-total {
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .btn-ruby.btn-primary {
+            border: none;
+            border-radius: 999px;
+            padding: 10px 18px;
+            background: linear-gradient(135deg, #8b0000, #dc143c);
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-ruby.btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 480px) {
+            .products-header h1 {
+                font-size: 26px;
+            }
+
+            .container-ruby {
+                padding: 0 16px;
+            }
+        }
+    </style>
+</head>
+<body class="ruby-page products-page">
+    <div class="products-nav">
+        <div class="nav-left">
+            <button class="back-btn" onclick="history.back()">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <h2>Select Ruby</h2>
+        </div>
+        <div class="nav-right">
+            <span class="user-name" id="userName">Guest</span>
+        </div>
+    </div>
+
+    <section class="products-section">
+        <div class="container-ruby">
+            <div class="products-header">
+                <h1>Premium Ruby</h1>
+                <p>Select quantity to proceed</p>
+            </div>
+
+            <div class="products-grid" id="productsGrid">
+                <!-- Product card injected by JS -->
+            </div>
+        </div>
+    </section>
+
+    <div class="cart-summary-bar" id="cartSummaryBar">
+        <div class="cart-summary-content">
+            <div class="cart-info">
+                <span class="cart-count" id="cartCount">0 items</span>
+                <span class="cart-total" id="cartTotalBar">₹0</span>
+            </div>
+            <button class="btn-ruby btn-primary btn-continue" id="continueToAddress" disabled>
+                Continue <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Inline JS: simplified version of ruby-products.js without login redirect -->
+    <script>
+        // Product data (same as live page)
+        const RUBY_PRODUCTS = [
+            {
+                id: 'ruby-1',
+                name: 'Ruby / Maanak',
+                price: 999,
+                image: 'images/ruby.jpeg', // keep same image path
+                origin: 'Mozambique',
+                unit: '1-50',
+                certification: 'IGI Certified'
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Set a simple guest name
+            const userNameEl = document.getElementById('userName');
+            if (userNameEl) userNameEl.textContent = 'Guest';
+
+            // Render product card
+            if (document.getElementById('productsGrid')) {
+                loadProducts();
+            }
+
+            // Initialize cart summary
+            updateCartSummary();
+
+            // Continue button just shows an alert in preview
+            const continueBtn = document.getElementById('continueToAddress');
+            if (continueBtn) {
+                continueBtn.addEventListener('click', function () {
+                    alert('This is a single-file mobile preview. On the real site this goes to the address page.');
+                });
+            }
+        });
+
+        function loadProducts() {
+            const grid = document.getElementById('productsGrid');
+            const cart = getCart();
+
+            grid.innerHTML = RUBY_PRODUCTS.map(product => {
+                const cartItem = cart.items.find(item => item.id === product.id);
+                const quantity = cartItem ? cartItem.quantity : 0;
+
+                return `
+                    <div class="product-card-ruby">
+                        <div class="product-image-wrapper">
+                            <img src="${product.image}" alt="${product.name}" class="product-image-ruby">
+                            <div class="product-badge">${product.certification}</div>
+                        </div>
+                        <div class="product-info-ruby">
+                            <h3 class="product-name-ruby">${product.name}</h3>
+                            <div class="product-subtitle">
+                                Premium, hand-picked ruby for astrological and jewellery use
+                            </div>
+                            <div class="product-meta">
+                                <span><i class="fas fa-map-marker-alt"></i> ${product.origin}</span>
+                                <span><i class="fas fa-weight"></i> ${product.unit} units</span>
+                            </div>
+                            <ul class="product-quality-list">
+                                <li><i class="fas fa-check-circle"></i> 100% Natural, Earth-Mined Ruby</li>
+                                <li><i class="fas fa-check-circle"></i> 100% Non-Heated &amp; Non-Treated</li>
+                                <li><i class="fas fa-certificate"></i> Lab-Certified for Authenticity</li>
+                            </ul>
+                            <div class="product-price-ruby">
+                                <span class="price-label">₹${product.price.toLocaleString('en-IN')}</span>
+                                <span class="price-unit">per unit</span>
+                            </div>
+                            <div class="product-quantity-selector">
+                                <button class="qty-btn-small qty-minus" onclick="updateProductQuantity('${product.id}', -1)">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <input type="number" class="qty-input-small" value="${quantity}" min="0" max="50"
+                                       id="qty-${product.id}" readonly>
+                                <button class="qty-btn-small qty-plus" onclick="updateProductQuantity('${product.id}', 1)">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Simple in-memory cart just for this preview
+        const previewCart = { items: [], total: 0 };
+
+        function getCart() {
+            return previewCart;
+        }
+
+        function saveCart(cart) {
+            cart.total = cart.items.reduce((sum, item) => sum + item.total, 0);
+        }
+
+        function updateProductQuantity(productId, change) {
+            const product = RUBY_PRODUCTS.find(p => p.id === productId);
+            if (!product) return;
+
+            const cart = getCart();
+            const existingItem = cart.items.find(item => item.id === productId);
+
+            let newQuantity = existingItem ? existingItem.quantity + change : change;
+            if (newQuantity < 0) newQuantity = 0;
+            if (newQuantity > 50) {
+                alert('Maximum 50 items allowed per product');
+                return;
+            }
+
+            if (newQuantity === 0) {
+                cart.items = cart.items.filter(item => item.id !== productId);
+            } else {
+                if (existingItem) {
+                    existingItem.quantity = newQuantity;
+                    existingItem.total = newQuantity * product.price;
+                } else {
+                    cart.items.push({
+                        id: productId,
+                        name: product.name,
+                        price: product.price,
+                        quantity: newQuantity,
+                        total: newQuantity * product.price,
+                        image: product.image
+                    });
+                }
+            }
+
+            saveCart(cart);
+
+            const qtyInput = document.getElementById(`qty-${productId}`);
+            if (qtyInput) qtyInput.value = newQuantity;
+
+            updateCartSummary();
+        }
+
+        function updateCartSummary() {
+            const cart = getCart();
+            const itemCount = cart.items.reduce((sum, item) => sum + item.quantity, 0);
+
+            const countEl = document.getElementById('cartCount');
+            const totalEl = document.getElementById('cartTotalBar');
+            const continueBtn = document.getElementById('continueToAddress');
+
+            if (countEl) {
+                countEl.textContent = `${itemCount} item${itemCount !== 1 ? 's' : ''}`;
+            }
+            if (totalEl) {
+                totalEl.textContent = `₹${(cart.total || 0).toLocaleString('en-IN')}`;
+            }
+            if (continueBtn) {
+                continueBtn.disabled = itemCount === 0;
+            }
+        }
+    </script>
+</body>
+</html>
+
+

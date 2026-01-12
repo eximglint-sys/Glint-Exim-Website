@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>100% Natural Ruby | Glint Exim Exclusive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --ruby: #8b000f;
+      --ruby-dark: #5e0009;
+      --ruby-soft: #f7ebee;
+      --gold: #d8aa3a;
+      --ink: #0f1115;
+      --muted: #6b7280;
+      --card: #11141c;
+      --border: #1f2430;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      --radius: 18px;
+      --radius-sm: 12px;
+    }
+    *,*::before,*::after{box-sizing:border-box;}
+    body{
+      margin:0;
+      font-family:'Inter',system-ui,-apple-system,sans-serif;
+      background:radial-gradient(circle at 20% 20%,rgba(216,170,58,.05),transparent 25%),
+                radial-gradient(circle at 80% 0%,rgba(139,0,15,.08),transparent 30%),
+                #0b0c10;
+      color:#e5e7eb;line-height:1.6;
+    }
+    h1,h2,h3,h4{font-family:'Playfair Display','Inter',serif;color:#f8fafc;margin:0 0 12px;}
+    p{margin:0 0 14px;color:#cbd5e1;}
+    a{color:#f8fafc;}
+    .page-shell{min-height:100vh;padding:16px;max-width:1200px;margin:0 auto 48px;}
+    .topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:rgba(17,20,28,.75);border:1px solid var(--border);backdrop-filter:blur(10px);border-radius:var(--radius);margin-bottom:18px;}
+    .brand{display:flex;gap:12px;align-items:center;}
+    .logo-gem{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--ruby),var(--ruby-dark));display:grid;place-items:center;color:#fef3c7;box-shadow:0 12px 24px rgba(139,0,15,.35);}
+    .brand-text strong{font-size:16px;}
+    .brand-text small{display:block;color:var(--muted);font-size:12px;}
+    .btn{border:1px solid transparent;border-radius:999px;padding:12px 18px;font-weight:600;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;background:#1f2430;color:#f8fafc;}
+    .btn:hover{transform:translateY(-2px);}
+    .btn.primary{background:linear-gradient(135deg,var(--ruby),var(--ruby-dark));border-color:rgba(216,170,58,.4);box-shadow:0 14px 36px rgba(139,0,15,.35);}
+    .btn.outline{background:transparent;border-color:var(--border);}
+    .btn.ghost{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.08);}
+    .hero{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;padding:24px;background:rgba(17,20,28,.8);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);}
+    .hero-copy .eyebrow{text-transform:uppercase;letter-spacing:.08em;color:var(--gold);font-weight:700;margin-bottom:10px;font-size:12px;}
+    .hero-copy h1{font-size:clamp(28px,4vw,40px);line-height:1.2;}
+    .hero-copy .lede{font-size:16px;color:#c7d2fe;}
+    .offer-banner{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;padding:12px;margin:12px 0 6px;border-radius:var(--radius-sm);border:1px solid rgba(216,170,58,.35);background:rgba(216,170,58,.08);color:#fef3c7;}
+    .offer-price strong{display:block;font-size:22px;line-height:1.1;}
+    .offer-price small{display:block;color:#fef3c7;opacity:.9;}
+    .offer-label{display:inline-block;padding:4px 8px;border-radius:8px;background:rgba(0,0,0,.25);font-size:12px;font-weight:700;letter-spacing:.04em;}
+    .offer-detail p{margin:2px 0;color:#fef3c7;}
+    .offer-detail .tiny-muted{font-size:12px;color:rgba(255,255,255,.75);}
+    .hero-badges{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0;}
+    .hero-badges span{padding:10px 12px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:12px;color:#e5e7eb;font-size:13px;display:inline-flex;gap:8px;align-items:center;}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin:10px 0 6px;}
+    .trust-note{color:var(--muted);font-size:13px;}
+    .hero-visual{display:grid;place-items:center;}
+    .hero-card{background:linear-gradient(180deg,#131722 0%,#0d1018 100%);border:1px solid var(--border);border-radius:var(--radius);padding:16px;position:relative;overflow:hidden;box-shadow:var(--shadow);}
+    .hero-card img{width:100%;border-radius:var(--radius-sm);display:block;object-fit:cover;}
+    .price-chip{position:absolute;top:16px;right:16px;background:rgba(0,0,0,.55);border:1px solid rgba(216,170,58,.5);color:#fef3c7;padding:10px 14px;border-radius:12px;text-align:right;}
+    .price-chip strong{display:block;font-size:18px;}
+    .quality-pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;}
+    .quality-pills span{font-size:12px;padding:8px 10px;background:rgba(216,170,58,.08);border:1px solid rgba(216,170,58,.2);border-radius:10px;color:#fef3c7;}
+    .section{margin-top:34px;padding:24px;background:rgba(17,20,28,.7);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);}
+    .section-head{text-align:center;max-width:740px;margin:0 auto 20px;}
+    .section-head .eyebrow{color:var(--gold);text-transform:uppercase;letter-spacing:.1em;font-weight:700;font-size:12px;margin-bottom:8px;}
+    .section-head h2{font-size:clamp(24px,3vw,32px);}
+    .video-frame{position:relative;padding-top:56.25%;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);background:#0b0c10;}
+    .video-frame iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;}
+    .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;}
+    .card{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;}
+    .card .icon{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--ruby),var(--ruby-dark));display:grid;place-items:center;color:#fef3c7;margin-bottom:10px;}
+    .products-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;}
+    .product-card{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:var(--radius-sm);padding:20px;position:relative;}
+    .product-image{width:100%;height:200px;margin-bottom:16px;border-radius:var(--radius-sm);overflow:hidden;background:rgba(0,0,0,.2);display:flex;align-items:center;justify-content:center;}
+    .product-image img{width:100%;height:100%;object-fit:cover;border-radius:var(--radius-sm);}
+    .coming-soon-badge{position:absolute;top:12px;right:12px;background:linear-gradient(135deg,var(--gold),#b8941f);color:#0b0c10;padding:6px 12px;border-radius:20px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;box-shadow:0 4px 12px rgba(216,170,58,.3);z-index:2;}
+    .product-card h3{font-size:20px;margin-bottom:8px;padding-right:100px;}
+    .product-category{color:var(--gold);font-size:13px;font-weight:600;margin-bottom:12px;text-transform:uppercase;letter-spacing:.05em;}
+    .product-description{color:#cbd5e1;font-size:14px;line-height:1.6;margin-bottom:14px;}
+    .product-benefits{list-style:none;padding:0;margin:0;}
+    .product-benefits li{color:#d1d5db;font-size:13px;line-height:1.6;margin-bottom:8px;padding-left:20px;position:relative;}
+    .product-benefits li::before{content:"✓";position:absolute;left:0;color:var(--gold);font-weight:700;}
+    .split{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;align-items:center;}
+    .bullets{list-style:none;padding:0;margin:0 0 18px;}
+    .bullets li{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px;color:#d1d5db;}
+    .bullets i{color:var(--gold);margin-top:3px;}
+    .cta-row{display:flex;gap:10px;flex-wrap:wrap;}
+    .badge-stack{display:grid;gap:10px;}
+    .badge{background:rgba(216,170,58,.08);border:1px solid rgba(216,170,58,.25);border-radius:var(--radius-sm);padding:12px;color:#fef3c7;}
+    .quote{margin-top:12px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px;font-style:italic;color:#e5e7eb;}
+    .cert-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+    .cert-card{padding:14px;border-radius:var(--radius-sm);border:1px solid var(--border);background:rgba(255,255,255,.03);}
+    .vision-mission{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin:24px 0;}
+    .vision-mission-card{padding:20px;border-radius:var(--radius-sm);border:1px solid rgba(216,170,58,.3);background:rgba(216,170,58,.08);color:#fef3c7;}
+    .vision-mission-card h3{color:#fef3c7;font-size:18px;margin-bottom:12px;display:flex;align-items:center;gap:10px;}
+    .vision-mission-card h3 i{color:var(--gold);}
+    .vision-mission-card p{color:#e5e7eb;font-style:italic;line-height:1.6;margin:0;}
+    .story-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:24px;}
+    .story-point{display:flex;gap:10px;padding:12px;border-radius:var(--radius-sm);border:1px solid var(--border);background:rgba(255,255,255,.02);}
+    .story-point .icon{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--ruby),var(--ruby-dark));display:grid;place-items:center;color:#fef3c7;flex-shrink:0;}
+    .process .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;}
+    .step{padding:14px;border-radius:var(--radius-sm);border:1px solid var(--border);background:rgba(255,255,255,.02);}
+    .step-num{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:10px;background:rgba(216,170,58,.15);color:#fef3c7;font-weight:700;margin-bottom:8px;}
+    .cta{background:linear-gradient(135deg,rgba(139,0,15,.85),rgba(8,10,16,.95));border:1px solid rgba(216,170,58,.35);box-shadow:0 16px 60px rgba(139,0,15,.4);}
+    .cta-card{display:grid;grid-template-columns:2fr 1fr;gap:18px;align-items:center;}
+    .cta-actions{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0;}
+    .cta-pillars{display:grid;gap:10px;}
+    .pillar{padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.1);background:rgba(0,0,0,.25);color:#fef3c7;display:flex;gap:8px;align-items:center;}
+    .faq-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;max-width:960px;margin:0 auto;}
+    .faq-item{padding:16px 18px;border-radius:var(--radius-sm);border:1px solid var(--border);background:rgba(255,255,255,.03);}
+    .footer{margin-top:28px;padding:20px;border-radius:var(--radius);border:1px solid var(--border);background:rgba(17,20,28,.7);}
+    .footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;}
+    .footer-note{margin-top:12px;color:var(--muted);font-size:13px;}
+    @media (max-width:820px){.topbar{flex-direction:column;gap:10px;align-items:flex-start;}.cta-card{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <div class="brand">
+        <span class="logo-gem"><i class="fas fa-gem"></i></span>
+        <div class="brand-text">
+          <strong>Glint Exim</strong>
+          <small>Original Ruby Importers · 20+ Years</small>
+        </div>
+      </div>
+      <div class="top-cta">
+        <button class="btn ghost" data-scroll="#cta">Shop Ruby</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Limited Release • Natural Ruby / Manik</p>
+          <h1>Own a Certified Ruby That Signals Growth and Power</h1>
+          <p class="lede">
+            Handpicked, non-heated, certified rubies direct from our mines-to-market pipeline.
+            100% Natural cuts,  darkish red, and authenticity guaranteed.
+          </p>
+          <p>Each stone is energized with special mantras to enhance positivity and embossed with the sacred <strong>ॐ</strong> symbol—revered in 1000+ meanings—further amplifying the power of your ruby.</p>
+          <div class="offer-banner">
+            <div class="offer-price">
+              <span class="offer-label">Launch Offer</span>
+              <strong>₹1,199</strong>
+              <small>for 6+ Ratti (90% off)</small>
+            </div>
+            <div class="offer-detail">
+              <p><strong>Market:</strong> ~₹12,000 for 6+ Ratti · <strong>Our Offer:</strong> ₹1,199</p>
+              <p class="tiny-muted">Limited inventory. Certified, non-heated, non-treated.</p>
+            </div>
+          </div>
+          <div class="hero-badges">
+            <span><i class="fas fa-certificate"></i> Certified</span>
+            <span><i class="fas fa-shield-alt"></i> 100% Genuine</span>
+            <span><i class="fas fa-truck"></i> Insured Delivery</span>
+            <span><i class="fas fa-clock"></i> 48h Dispatch</span>
+          </div>
+          <div class="hero-actions">
+            <button class="btn primary" data-scroll="#cta">Unlock Offer</button>
+            <button class="btn outline" data-scroll="#video">See Unboxing</button>
+          </div>
+          <p class="trust-note">Trusted by patrons and astrologers for over a decade.</p>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-card">
+            <img src="ruby.jpeg" alt="100% Natural Ruby" loading="lazy">
+            <div class="price-chip">
+              <span>From</span>
+              <strong>₹1199</strong>
+              <small></small>
+            </div>
+            <div class="quality-pills">
+              <span>100% Natural</span>
+              <span>Non-Heated</span>
+              <span>Non-Treated</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section video" id="video">
+        <div class="section-head">
+          <p class="eyebrow">Experience</p>
+          <h2>Watch the Ruby Unboxing</h2>
+          <p>See the fire, clarity, and luster of our handpicked stones.</p>
+        </div>
+        <div class="video-frame">
+          <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0&modestbranding=1" title="Ruby Unboxing" allowfullscreen loading="lazy"></iframe>
+        </div>
+      </section>
+
+      <section class="section benefits">
+        <div class="section-head">
+          <p class="eyebrow">Benefits</p>
+          <h2>Why a 100% Natural Ruby Elevates You</h2>
+          <p>From confidence to accelerated growth, a powerful gemstone is an ally.</p>
+        </div>
+        <div class="cards-grid">
+          <div class="card">
+            <div class="icon"><i class="fas fa-bolt"></i></div>
+            <h3>Amplified Success</h3>
+            <p>Natural & Purer rubies are believed to accelerate career and business progress.</p>
+          </div>
+          <div class="card">
+            <div class="icon"><i class="fas fa-heart"></i></div>
+            <h3>Vitality & Confidence</h3>
+            <p>Associated with courage, charisma, and a commanding presence.</p>
+          </div>
+          <div class="card">
+            <div class="icon"><i class="fas fa-award"></i></div>
+            <h3>Certification First</h3>
+            <p>Certificates are provided, with 100% origin traceability.</p>
+          </div>
+          <div class="card">
+            <div class="icon"><i class="fas fa-gem"></i></div>
+            <h3>Higher Carat, Higher Impact</h3>
+            <p>Larger sizes to maximize astrological and aesthetic effect.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section products">
+        <div class="section-head">
+          <p class="eyebrow">More Products</p>
+          <h2>Coming Soon</h2>
+          <p>Explore our expanding collection of powerful gemstone jewelry and spiritual accessories.</p>
+        </div>
+        <div class="products-grid">
+          <div class="product-card">
+            <div class="product-image">
+              <img src="pyrite-bracelet.jpeg" alt="Pyrite Bracelet" loading="lazy">
+            </div>
+            <div class="coming-soon-badge">Coming Soon</div>
+            <h3>Pyrite Bracelet</h3>
+            <p class="product-category">Wealth & Protection Bracelet</p>
+            <p class="product-description">Known as Fool's Gold, Pyrite attracts wealth, abundance, and success while forming a strong shield against negative energies. Its metallic golden shimmer makes it both stylish and powerful.</p>
+            <ul class="product-benefits">
+              <li>Attracts wealth, abundance, and financial growth</li>
+              <li>Protects against negative energy and emotional drain</li>
+              <li>Boosts confidence, motivation, and willpower</li>
+              <li>Ideal for business owners, professionals, and entrepreneurs</li>
+            </ul>
+          </div>
+          <div class="product-card">
+            <div class="product-image">
+              <img src="evil-eye-bracelet.jpeg" alt="Evil Eye Bracelet" loading="lazy">
+            </div>
+            <div class="coming-soon-badge">Coming Soon</div>
+            <h3>Evil Eye Bracelet</h3>
+            <p class="product-category">Protection & Energy Shield</p>
+            <p class="product-description">Designed to protect the wearer from jealousy, negativity, and unwanted energies. Features a striking eye centerpiece complemented by grounding black beads.</p>
+            <ul class="product-benefits">
+              <li>Protects against negative intentions and bad luck</li>
+              <li>Absorbs and deflects negative energies</li>
+              <li>Promotes emotional balance and peace</li>
+              <li>Stylish daily-wear protection accessory</li>
+            </ul>
+          </div>
+          <div class="product-card">
+            <div class="product-image">
+              <img src="rudraksha-mala.jpeg" alt="Rudraksha Mala" loading="lazy">
+            </div>
+            <div class="coming-soon-badge">Coming Soon</div>
+            <h3>Rudraksha Mala</h3>
+            <p class="product-category">Spiritual & Meditation Mala</p>
+            <p class="product-description">Crafted from authentic Rudraksha beads, this traditional 108-bead mala is ideal for meditation, chanting, and spiritual practices. Revered for centuries for its calming properties.</p>
+            <ul class="product-benefits">
+              <li>Enhances meditation and spiritual awareness</li>
+              <li>Calms the mind and reduces stress</li>
+              <li>Supports mental clarity and inner peace</li>
+              <li>Sacred mala for chanting, yoga, and daily wear</li>
+            </ul>
+          </div>
+          <div class="product-card">
+            <div class="product-image">
+              <img src="rose-quartz-howlite-bracelet.jpeg" alt="Rose Quartz & Howlite Bracelet" loading="lazy">
+            </div>
+            <div class="coming-soon-badge">Coming Soon</div>
+            <h3>Rose Quartz & Howlite Bracelet</h3>
+            <p class="product-category">Emotional Healing & Calm</p>
+            <p class="product-description">Combines the gentle energy of Rose Quartz with the calming properties of Howlite. Designed to promote emotional balance, self-love, and inner peace.</p>
+            <ul class="product-benefits">
+              <li>Encourages love, compassion, and emotional healing</li>
+              <li>Reduces stress, anxiety, and overthinking</li>
+              <li>Promotes patience, calmness, and clarity</li>
+              <li>Ideal for daily wear and emotional balance</li>
+            </ul>
+          </div>
+          <div class="product-card">
+            <div class="product-image">
+              <img src="wealth-abundance-bracelet.jpeg" alt="Wealth & Abundance Multi-Stone Bracelet" loading="lazy">
+            </div>
+            <div class="coming-soon-badge">Coming Soon</div>
+            <h3>Wealth & Abundance Multi-Stone Bracelet</h3>
+            <p class="product-category">Wealth, Growth & Financial Discipline</p>
+            <p class="product-description">A powerful multi-stone bracelet featuring Pyrite, Green Aventurine, Clear Quartz, Citrine, Hematite, and Black Obsidian. Designed to support wealth attraction and smart financial decisions.</p>
+            <ul class="product-benefits">
+              <li>Attracts wealth, luck, and new opportunities</li>
+              <li>Supports smart money decisions and financial clarity</li>
+              <li>Grounds energy and controls impulsive spending</li>
+              <li>Protects from negative and draining energies</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section split">
+        <div class="split-copy">
+          <p class="eyebrow">Scale Up</p>
+          <h2>Elevate Your Success with 100% Natural Rubies</h2>
+          <p>100% Natural rubies aren't just jewelry—they're symbols of achievement, power, and forward momentum. Choose stones that match your ambition.</p>
+          <div class="cta-row">
+            <button class="btn primary" data-scroll="#certs">View Certification</button>
+          </div>
+        </div>
+        <div class="split-visual">
+          <div class="badge-stack">
+            <div class="badge">
+              <strong>20+ Years</strong>
+              <span>Trusted Importer</span>
+            </div>
+            <div class="badge">
+              <strong>Direct</strong>
+              <span>Mines to Market</span>
+            </div>
+            <div class="badge">
+              <strong>Insured</strong>
+              <span>Shipping</span>
+            </div>
+          </div>
+          <div class="quote">
+            “We are original importers of these rubies, with decade-long relationships at the source. No middlemen. No compromises.”
+          </div>
+        </div>
+      </section>
+
+      <section class="section certs" id="certs">
+        <div class="section-head">
+          <p class="eyebrow">Authenticity</p>
+          <h2>Certification & Quality Promise</h2>
+          <p>Every stone passes multi-point inspection before it reaches you.</p>
+        </div>
+        <div class="cert-grid">
+          <div class="cert-card">
+            <h3>Certification</h3>
+            <p>Soochak Lab reports are available. </p>
+          </div>
+          <div class="cert-card">
+            <h3>Non-Heated, Non-Treated</h3>
+            <p>We only supply 100% natural rubies with full disclosure and documentation.</p>
+          </div>
+          <div class="cert-card">
+            <h3>Secure Chain</h3>
+            <p>Sealed packaging, tamper-evident, insured transit across India.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section story">
+        <div class="section-head">
+          <p class="eyebrow">Who We Are</p>
+          <h2>Original Ruby Importers · Glint Exim</h2>
+          <p>Supplying 100% Natural rubies to patrons, jewellers, and astrologers for 20+ years.</p>
+        </div>
+        <div class="vision-mission">
+          <div class="vision-mission-card">
+            <h3><i class="fas fa-eye"></i> Vision Statement</h3>
+            <p>"To create a world where people feel deeply seen, supported, and connected to their inner light. Through the sacred energy of 100% natural rubies, we seek to inspire love, courage, wealth prosperity and hope—helping individuals feel grounded, empowered, and aligned with abundance and purpose."</p>
+          </div>
+          <div class="vision-mission-card">
+            <h3><i class="fas fa-bullseye"></i> Mission Statement</h3>
+            <p>"To craft authentic, 100% natural ruby talismans that support life’s journeys with intention and care. Each ruby is thoughtfully selected, engraved, and energetically charged to nurture confidence, clarity, and prosperity—guiding people to reconnect with themselves and remember their inner strength."</p>
+          </div>
+        </div>
+        <div class="story-content">
+          <div class="story-point">
+            <div class="icon"><i class="fas fa-route"></i></div>
+            <div>
+              <h4>Direct Sourcing</h4>
+              <p>Long-term mine partnerships; directly importing to India.</p>
+            </div>
+          </div>
+          <div class="story-point">
+            <div class="icon"><i class="fas fa-hand-holding-heart"></i></div>
+            <div>
+              <h4>Advisory First</h4>
+              <p>Guidance on sizes, settings, and astrological alignment.</p>
+            </div>
+          </div>
+          <div class="story-point">
+            <div class="icon"><i class="fas fa-shield-virus"></i></div>
+            <div>
+              <h4>Transparent & Secure</h4>
+              <p>Insured logistics, sealed boxes, and clear paperwork every time.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section process">
+        <div class="section-head">
+          <p class="eyebrow">How It Works</p>
+          <h2>Simple 4-Step Journey</h2>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <span class="step-num">1</span>
+            <h4>Choose Your Ruby</h4>
+            <p>Select quantity that matches your intent.</p>
+          </div>
+          <div class="step">
+            <span class="step-num">2</span>
+            <h4>Checkout Securely</h4>
+            <p>Pay via Razorpay (UPI/cards) or opt for COD.</p>
+          </div>
+          <div class="step">
+            <span class="step-num">3</span>
+            <h4>Insured Dispatch</h4>
+            <p>Ships in 48h with tracking and tamper-evident seals.</p>
+          </div>
+          <div class="step">
+            <span class="step-num">4</span>
+            <h4>Certification & Care</h4>
+            <p>Receive documents, care tips, and optional mounting guidance.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section cta" id="cta">
+        <div class="cta-card">
+          <div>
+            <p class="eyebrow">Exclusive Offer</p>
+            <h2>Ready to Own Your Ruby?</h2>
+            <p class="lede">100% Natural Natural Ruby / Manik • Starting at ₹1199 • Limited inventory</p>
+            <div class="cta-actions">
+              <button class="btn primary" id="ctaShop">Go to Secure Purchase</button>
+              <button class="btn outline" data-scroll="#benefits">View Benefits</button>
+            </div>
+            <p class="trust-note">Checkout handled on Shopify with Razorpay and insured delivery.</p>
+          </div>
+          <div class="cta-pillars">
+            <div class="pillar"><i class="fas fa-lock"></i> Secure Checkout</div>
+            <div class="pillar"><i class="fas fa-file-certificate"></i> Certified</div>
+            <div class="pillar"><i class="fas fa-box"></i> Insured Shipping</div>
+            <div class="pillar"><i class="fas fa-user-shield"></i> Trusted Importer</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section faq" id="benefits">
+        <div class="section-head">
+          <p class="eyebrow">FAQ</p>
+          <h2>Common Questions</h2>
+        </div>
+        <div class="faq-list">
+          <div class="faq-item">
+            <h4>Do you provide certification?</h4>
+            <p>Yes, certificates are provided; documentation ships with the stone.</p>
+          </div>
+          <div class="faq-item">
+            <h4>Is the ruby treated?</h4>
+            <p>No. Our rubies are natural, non-heated, non-treated, with full disclosure.</p>
+          </div>
+          <div class="faq-item">
+            <h4>How fast is delivery?</h4>
+            <p>We dispatch within 48 hours. Shipping is insured with tracking.</p>
+          </div>
+          <div class="faq-item">
+            <h4>Payment options?</h4>
+            <p>Razorpay (UPI, cards, net banking) and COD (eligible pin codes).</p>
+          </div>
+          <div class="faq-item">
+            <h4>How do I take care of my ruby?</h4>
+            <p>To keep your ruby radiant and free from white marks, dip it in oil for about two hours once every six months.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-grid">
+        <div>
+          <strong>Glint Exim</strong>
+          <p>Original ruby importers for 20+ years. Direct sourcing, certified stones, and insured delivery.</p>
+        </div>
+        <div>
+          <strong>Assurance</strong>
+          <p>Authentic • Certified • Non-Heated • Non-Treated</p>
+          <p>Secure Razorpay checkout on Shopify.</p>
+        </div>
+        <div>
+          <strong>Need help?</strong>
+          <p>Email: <a href="https://mail.google.com/mail/?view=cm&fs=1&to=glintexim@gmail.com" target="_blank" rel="noopener">glintexim@gmail.com</a></p>
+        </div>
+      </div>
+      <p class="footer-note"></p>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      const SHOPIFY_PAGE_URL = 'https://fq0a1w-t7.myshopify.com/pages/ruby-maanak';
+
+      document.querySelectorAll('[data-scroll]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const target = btn.getAttribute('data-scroll');
+          const el = document.querySelector(target);
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+
+      const ctaShop = document.getElementById('ctaShop');
+      if (ctaShop) {
+        ctaShop.addEventListener('click', () => {
+          window.location.href = SHOPIFY_PAGE_URL;
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Premium Ruby Collection | Glint Exim</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="ruby-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="ruby-page login-page">
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="logo-ruby">
+                    <div class="logo-icon-wrapper">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <span>Glint Exim</span>
+                </div>
+                <h1>Welcome Back</h1>
+                <p>Sign in to continue to our premium Ruby collection</p>
+            </div>
+
+            <div class="login-options">
+                <!-- Google Login -->
+                <button class="login-btn google-btn" id="googleLogin">
+                    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" class="provider-icon">
+                    Continue with Google
+                </button>
+
+                <!-- Email Login -->
+                <div class="login-divider">
+                    <span>OR</span>
+                </div>
+
+                <form class="email-login-form" id="emailLoginForm">
+                    <div class="form-group-login">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    </div>
+                    <button type="submit" class="login-btn email-btn">
+                        <i class="fas fa-envelope"></i> Continue with Email
+                    </button>
+                </form>
+
+                <!-- Phone Login -->
+                <div class="login-divider">
+                    <span>OR</span>
+                </div>
+
+                <form class="phone-login-form" id="phoneLoginForm">
+                    <div class="form-group-login">
+                        <label for="phone">Phone Number</label>
+                        <div class="phone-input-wrapper">
+                            <select class="country-code" id="countryCode">
+                                <option value="+91">+91 (IN)</option>
+                                <option value="+1">+1 (US)</option>
+                                <option value="+44">+44 (UK)</option>
+                            </select>
+                            <input type="tel" id="phone" name="phone" placeholder="Enter phone number" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="login-btn phone-btn">
+                        <i class="fas fa-phone"></i> Continue with Phone
+                    </button>
+                </form>
+            </div>
+
+            <div class="login-footer">
+                <p>By continuing, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></p>
+                <div id="logoutSection" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #e0e0e0; display: none;">
+                    <p style="font-size: 11px; color: #666; margin-bottom: 8px;">Already logged in?</p>
+                    <button class="login-btn" id="logoutBtn" style="background: #f5f5f5; color: #333; border: 1px solid #e0e0e0; padding: 10px 15px; font-size: 12px;">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="ruby-auth.js"></script>
+</body>
+</html>
+

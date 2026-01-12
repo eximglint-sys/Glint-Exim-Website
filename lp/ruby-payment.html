@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - Secure Checkout | Glint Exim</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="ruby-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="ruby-page payment-page">
+    <div class="products-nav">
+        <div class="nav-left">
+            <a href="ruby-address.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <h2>Payment</h2>
+        </div>
+        <div class="nav-right">
+            <div class="secure-badge-nav">
+                <i class="fas fa-lock"></i>
+                <span>Secure</span>
+            </div>
+        </div>
+    </div>
+
+    <section class="payment-section-new">
+        <div class="container-ruby">
+            <div class="payment-layout">
+                <!-- Payment Methods -->
+                <div class="payment-methods-section">
+                    <div class="payment-header-section">
+                        <h2>Select Payment Method</h2>
+                        <p class="payment-subtitle">Choose your preferred payment option</p>
+                    </div>
+
+                    <div class="payment-methods-list">
+                        <label class="payment-method-card">
+                            <input type="radio" name="paymentMethod" value="upi" checked>
+                            <div class="method-content">
+                                <div class="method-icon upi">
+                                    <i class="fas fa-mobile-alt"></i>
+                                </div>
+                                <div class="method-info">
+                                    <h4>UPI</h4>
+                                    <p>Pay using UPI apps</p>
+                                </div>
+                                <div class="radio-check"></div>
+                            </div>
+                        </label>
+
+                        <label class="payment-method-card">
+                            <input type="radio" name="paymentMethod" value="card">
+                            <div class="method-content">
+                                <div class="method-icon card">
+                                    <i class="fas fa-credit-card"></i>
+                                </div>
+                                <div class="method-info">
+                                    <h4>Credit / Debit Card</h4>
+                                    <p>Visa, Mastercard, RuPay</p>
+                                </div>
+                                <div class="radio-check"></div>
+                            </div>
+                        </label>
+
+                        <label class="payment-method-card">
+                            <input type="radio" name="paymentMethod" value="netbanking">
+                            <div class="method-content">
+                                <div class="method-icon bank">
+                                    <i class="fas fa-university"></i>
+                                </div>
+                                <div class="method-info">
+                                    <h4>Net Banking</h4>
+                                    <p>All major banks</p>
+                                </div>
+                                <div class="radio-check"></div>
+                            </div>
+                        </label>
+
+                        <label class="payment-method-card">
+                            <input type="radio" name="paymentMethod" value="cod">
+                            <div class="method-content">
+                                <div class="method-icon cod">
+                                    <i class="fas fa-truck"></i>
+                                </div>
+                                <div class="method-info">
+                                    <h4>Cash on Delivery</h4>
+                                    <p>₹49 shipping fee on COD orders</p>
+                                </div>
+                                <div class="radio-check"></div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <!-- UPI Details (shown when UPI selected) -->
+                    <div class="payment-details-form" id="upiDetails" style="display: block;">
+                        <div class="form-group-payment">
+                            <label>UPI ID</label>
+                            <input type="text" placeholder="yourname@upi" id="upiId">
+                        </div>
+                    </div>
+
+                    <!-- Card Details (shown when Card selected) -->
+                    <div class="payment-details-form" id="cardDetails" style="display: none;">
+                        <div class="form-group-payment">
+                            <label>Card Number</label>
+                            <input type="text" placeholder="1234 5678 9012 3456" maxlength="19" id="cardNumber">
+                        </div>
+                        <div class="form-row-payment">
+                            <div class="form-group-payment">
+                                <label>Expiry Date</label>
+                                <input type="text" placeholder="MM/YY" maxlength="5" id="cardExpiry">
+                            </div>
+                            <div class="form-group-payment">
+                                <label>CVV</label>
+                                <input type="text" placeholder="123" maxlength="3" id="cardCvv">
+                            </div>
+                        </div>
+                        <div class="form-group-payment">
+                            <label>Cardholder Name</label>
+                            <input type="text" placeholder="Name on card" id="cardName">
+                        </div>
+                    </div>
+
+                    <!-- Net Banking (shown when Net Banking selected) -->
+                    <div class="payment-details-form" id="netbankingDetails" style="display: none;">
+                        <div class="form-group-payment">
+                            <label>Select Bank</label>
+                            <select id="bankSelect">
+                                <option value="">Choose your bank</option>
+                                <option value="hdfc">HDFC Bank</option>
+                                <option value="icici">ICICI Bank</option>
+                                <option value="sbi">State Bank of India</option>
+                                <option value="axis">Axis Bank</option>
+                                <option value="kotak">Kotak Mahindra Bank</option>
+                                <option value="pnb">Punjab National Bank</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Summary Sidebar -->
+                <div class="payment-summary-sidebar">
+                    <h3>Order Summary</h3>
+                    <div id="paymentOrderItems"></div>
+                    <div class="summary-divider"></div>
+                    <div class="summary-row">
+                        <span>Subtotal:</span>
+                        <span id="paymentSubtotal">₹0</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Shipping:</span>
+                            <span id="paymentShippingAmount">Free</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Discount:</span>
+                            <span id="paymentDiscount">₹0</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>GST (0.25%):</span>
+                            <span id="paymentGST">₹0</span>
+                    </div>
+                    <div class="summary-divider"></div>
+                    <div class="summary-row total-row">
+                        <span>Total Amount:</span>
+                        <span id="paymentTotalAmount">₹0</span>
+                    </div>
+
+                    <div class="delivery-info">
+                        <h4><i class="fas fa-truck"></i> Delivery to</h4>
+                        <div id="deliveryAddress"></div>
+                    </div>
+
+                    <button class="btn-ruby btn-primary btn-full btn-pay" id="payNowBtn">
+                        <i class="fas fa-lock"></i> Pay Securely
+                    </button>
+
+                    <div class="security-badges-payment">
+                        <div class="security-badge-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <div>
+                                <strong>256-bit SSL</strong>
+                                <span>Encrypted</span>
+                            </div>
+                        </div>
+                        <div class="security-badge-item">
+                            <i class="fas fa-lock"></i>
+                            <div>
+                                <strong>PCI DSS</strong>
+                                <span>Compliant</span>
+                            </div>
+                        </div>
+                        <div class="security-badge-item">
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <strong>Secure</strong>
+                                <span>Payment</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="ruby-products.js"></script>
+    <script src="ruby-payment.js"></script>
+</body>
+</html>
+
