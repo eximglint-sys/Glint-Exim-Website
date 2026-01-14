@@ -438,7 +438,37 @@
   /*]]>*/
   </script>
 
-  <script src="script.js"></script>
+  <script src="script.js" onerror="console.error('Failed to load script.js - check file path!')"></script>
+  <script>
+    // Debug: Check if script.js loaded and everything is ready
+    window.addEventListener('load', function() {
+      console.log('=== Page Load Debug ===');
+      console.log('Script.js loaded:', typeof triggerShopifyModal !== 'undefined');
+      console.log('Shopify UI available:', !!window.shopifyUI);
+      console.log('Shopify ready:', !!window.shopifyReady);
+      console.log('Product component exists:', !!document.getElementById('product-component-1768370709576'));
+      
+      // Check if buttons exist
+      const shopBtn = document.getElementById('shopRubyBtn');
+      const ctaBtn = document.getElementById('ctaShop');
+      console.log('Shop Ruby button exists:', !!shopBtn);
+      console.log('CTA Shop button exists:', !!ctaBtn);
+      
+      if (shopBtn) {
+        console.log('Shop Ruby button has listener:', !!shopBtn.dataset.shopifyListener);
+        // Test click handler
+        console.log('Shop Ruby button onclick:', shopBtn.onclick);
+      }
+      
+      // Force setup buttons one more time after page load
+      setTimeout(function() {
+        if (typeof setupShopifyButtons === 'function') {
+          console.log('Force setting up buttons after page load...');
+          setupShopifyButtons();
+        }
+      }, 2000);
+    });
+  </script>
 </body>
 </html>
 

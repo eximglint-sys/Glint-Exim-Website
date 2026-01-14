@@ -1,9 +1,14 @@
 // Simple scroll helpers and CTA redirect
 (function () {
+  'use strict';
+  
   const SHOPIFY_PAGE_URL = 'https://fq0a1w-t7.myshopify.com/pages/ruby-maanak';
+  
+  console.log('script.js loaded');
 
   // Wait for DOM to be ready
   function init() {
+    console.log('Initializing script...');
     // Setup scroll handlers
     document.querySelectorAll('[data-scroll]').forEach((btn) => {
       btn.addEventListener('click', () => {
@@ -21,14 +26,18 @@
 
   // Setup Shopify button handlers - simple one-time setup
   function setupShopifyButtons() {
+    console.log('Setting up Shopify buttons...');
+    
     const ctaShop = document.getElementById('ctaShop');
     if (ctaShop && !ctaShop.dataset.shopifyListener) {
       ctaShop.dataset.shopifyListener = 'true';
       ctaShop.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
+        console.log('CTA Shop button clicked');
         triggerShopifyModal();
       });
+      console.log('CTA Shop button listener added');
     }
 
     const shopRubyBtn = document.getElementById('shopRubyBtn');
@@ -37,8 +46,14 @@
       shopRubyBtn.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
+        console.log('Shop Ruby button clicked');
         triggerShopifyModal();
       });
+      console.log('Shop Ruby button listener added');
+    } else if (shopRubyBtn) {
+      console.log('Shop Ruby button already has listener');
+    } else {
+      console.warn('Shop Ruby button not found!');
     }
   }
 
@@ -170,5 +185,15 @@
   if (window.shopifyUI || document.getElementById('product-component-1768370709576')) {
     setTimeout(setupShopifyButtons, 2000);
   }
+  
+  // Also setup on window load (for GoDaddy/live sites where timing might differ)
+  window.addEventListener('load', function() {
+    console.log('Window load event - setting up buttons');
+    setTimeout(setupShopifyButtons, 1500);
+  });
+  
+  // Make functions globally available for debugging
+  window.setupShopifyButtons = setupShopifyButtons;
+  window.triggerShopifyModal = triggerShopifyModal;
 })();
 
