@@ -79,6 +79,17 @@ a {
   box-shadow: 0 12px 24px rgba(139, 0, 15, 0.35);
 }
 
+.brand-logo {
+  height: 42px;
+  width: auto;
+  border-radius: 10px;
+  object-fit: contain;
+  background: #0b0c10;
+  padding: 4px;
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+}
+
 .brand-text strong {
   font-size: 16px;
 }
@@ -239,6 +250,8 @@ a {
   position: relative;
   overflow: hidden;
   box-shadow: var(--shadow);
+  max-width: 420px;
+  width: 100%;
 }
 
 .hero-card img {
@@ -246,6 +259,58 @@ a {
   border-radius: var(--radius-sm);
   display: block;
   object-fit: cover;
+  max-height: 420px;
+}
+
+.hero-carousel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+}
+
+.carousel-slide {
+  display: none;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 0.6s ease-in-out;
+}
+
+.carousel-slide.active {
+  display: block;
+  opacity: 1;
+}
+
+.carousel-slide img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-sm);
+}
+
+.carousel-dots {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.carousel-dots .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.carousel-dots .dot.active {
+  background: var(--gold);
+  box-shadow: 0 0 8px rgba(216, 170, 58, 0.6);
 }
 
 .price-chip {
