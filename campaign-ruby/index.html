@@ -16,14 +16,14 @@
     <header class="topbar">
       <div class="brand">
         <img class="brand-logo" src="../lp/images/logo.jpeg" alt="Glint Exim logo" loading="lazy">
-        <span class="logo-gem"><i class="fas fa-gem"></i></span>
+        
         <div class="brand-text">
           <strong>Glint Exim</strong>
           <small>Original Ruby Importers · 20+ Years</small>
         </div>
       </div>
       <div class="top-cta">
-        <button class="btn ghost" data-scroll="#cta">Shop Ruby</button>
+        <button class="btn ghost" id="shopRubyBtn">Shop Ruby</button>
       </div>
     </header>
 
@@ -62,18 +62,7 @@
         </div>
         <div class="hero-visual">
           <div class="hero-card">
-            <div class="hero-carousel">
-              <div class="carousel-slide active">
-                <img src="../lp/images/ruby.jpeg" alt="100% Natural Ruby" loading="lazy">
-              </div>
-              <div class="carousel-slide">
-                <img src="../lp/images/image.jpeg" alt="Premium Ruby" loading="lazy">
-              </div>
-            </div>
-            <div class="carousel-dots">
-              <span class="dot active" data-slide="0"></span>
-              <span class="dot" data-slide="1"></span>
-            </div>
+            <img src="../lp/images/ruby.jpeg" alt="100% Natural Ruby" loading="lazy">
             <div class="price-chip">
               <span>From</span>
               <strong>₹1199</strong>
@@ -323,6 +312,125 @@
       <p class="footer-note"></p>
     </footer>
   </div>
+
+  <!-- Shopify Buy Button Component -->
+  <div id='product-component-1768370709576'></div>
+
+  <script type="text/javascript">
+  /*<![CDATA[*/
+  (function () {
+    var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+    if (window.ShopifyBuy) {
+      if (window.ShopifyBuy.UI) {
+        ShopifyBuyInit();
+      } else {
+        loadScript();
+      }
+    } else {
+      loadScript();
+    }
+    function loadScript() {
+      var script = document.createElement('script');
+      script.async = true;
+      script.src = scriptURL;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
+      script.onload = ShopifyBuyInit;
+    }
+    function ShopifyBuyInit() {
+      var client = ShopifyBuy.buildClient({
+        domain: 'qhrmh1-yu.myshopify.com',
+        storefrontAccessToken: '24f9545ee81a1702a55296a581ccdfb0',
+      });
+      ShopifyBuy.UI.onReady(client).then(function (ui) {
+        ui.createComponent('product', {
+          id: '10208663765309',
+          node: document.getElementById('product-component-1768370709576'),
+          moneyFormat: 'Rs.%20%7B%7Bamount%7D%7D',
+          options: {
+            "product": {
+              "styles": {
+                "product": {
+                  "@media (min-width: 601px)": {
+                    "max-width": "calc(25% - 20px)",
+                    "margin-left": "20px",
+                    "margin-bottom": "50px"
+                  }
+                }
+              },
+              "text": {
+                "button": "Add to cart"
+              }
+            },
+            "productSet": {
+              "styles": {
+                "products": {
+                  "@media (min-width: 601px)": {
+                    "margin-left": "-20px"
+                  }
+                }
+              }
+            },
+            "modalProduct": {
+              "contents": {
+                "img": false,
+                "imgWithCarousel": true,
+                "button": false,
+                "buttonWithQuantity": true
+              },
+              "styles": {
+                "product": {
+                  "@media (min-width: 601px)": {
+                    "max-width": "100%",
+                    "margin-left": "0px",
+                    "margin-bottom": "0px"
+                  }
+                }
+              },
+              "text": {
+                "button": "Add to cart"
+              }
+            },
+            "option": {},
+            "cart": {
+              "text": {
+                "total": "Subtotal",
+                "button": "Checkout"
+              },
+              "popup": false,
+              "startOpen": false
+            },
+            "toggle": {
+              "contents": {
+                "count": false,
+                "title": false,
+                "icon": false
+              },
+              "styles": {
+                "toggle": {
+                  "display": "none"
+                }
+              }
+            }
+          },
+        });
+        
+        // Store UI instance globally for button triggers
+        window.shopifyUI = ui;
+        window.shopifyClient = client;
+        
+        // Wait a bit for component to render, then store reference
+        setTimeout(function() {
+          const productComponent = document.getElementById('product-component-1768370709576');
+          if (productComponent) {
+            window.shopifyProductComponent = productComponent;
+            console.log('Shopify component initialized');
+          }
+        }, 1000);
+      });
+    }
+  })();
+  /*]]>*/
+  </script>
 
   <script src="script.js"></script>
 </body>
