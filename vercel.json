@@ -1,0 +1,19 @@
+{
+  "routes": [
+    {
+      "src": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "ruby.glintexim.com"
+        }
+      ],
+      "dest": "/campaign-ruby/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ]
+}
+
