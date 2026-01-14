@@ -2,22 +2,59 @@
 (function () {
   const SHOPIFY_PAGE_URL = 'https://fq0a1w-t7.myshopify.com/pages/ruby-maanak';
 
-  document.querySelectorAll('[data-scroll]').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const target = btn.getAttribute('data-scroll');
-      const el = document.querySelector(target);
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+  // Wait for DOM to be ready
+  function init() {
+    // Setup scroll handlers
+    document.querySelectorAll('[data-scroll]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-scroll');
+        const el = document.querySelector(target);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
     });
+
+    // Setup Shopify button handlers - wait for Shopify to be ready
+    setupShopifyButtons();
+  }
+
+  // Setup Shopify button handlers
+  function setupShopifyButtons() {
+    const ctaShop = document.getElementById('ctaShop');
+    if (ctaShop) {
+      // Remove existing listeners to avoid duplicates
+      const newCtaShop = ctaShop.cloneNode(true);
+      ctaShop.parentNode.replaceChild(newCtaShop, ctaShop);
+      newCtaShop.addEventListener('click', (e) => {
+        e.preventDefault();
+        triggerShopifyModal();
+      });
+    }
+
+    const shopRubyBtn = document.getElementById('shopRubyBtn');
+    if (shopRubyBtn) {
+      // Remove existing listeners to avoid duplicates
+      const newShopRubyBtn = shopRubyBtn.cloneNode(true);
+      shopRubyBtn.parentNode.replaceChild(newShopRubyBtn, shopRubyBtn);
+      newShopRubyBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        triggerShopifyModal();
+      });
+    }
+  }
+
+  // Listen for Shopify ready event
+  window.addEventListener('shopifyReady', function() {
+    console.log('Shopify ready event received');
+    setupShopifyButtons();
   });
 
-  const ctaShop = document.getElementById('ctaShop');
-  if (ctaShop) {
-    ctaShop.addEventListener('click', (e) => {
-      e.preventDefault();
-      triggerShopifyModal();
-    });
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
   }
 
   // Shopify Buy Button Triggers
@@ -124,13 +161,9 @@
     }
   }
 
-  // Add click handler for Shop Ruby button
-  const shopRubyBtn = document.getElementById('shopRubyBtn');
-  if (shopRubyBtn) {
-    shopRubyBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      triggerShopifyModal();
-    });
+  // Re-setup buttons after Shopify initializes (in case they weren't ready)
+  if (window.shopifyUI || document.getElementById('product-component-1768370709576')) {
+    setTimeout(setupShopifyButtons, 2000);
   }
 })();
 

@@ -423,7 +423,13 @@
           const productComponent = document.getElementById('product-component-1768370709576');
           if (productComponent) {
             window.shopifyProductComponent = productComponent;
+            window.shopifyReady = true;
             console.log('Shopify component initialized');
+            
+            // Trigger custom event to notify that Shopify is ready
+            if (typeof window.dispatchEvent !== 'undefined') {
+              window.dispatchEvent(new CustomEvent('shopifyReady'));
+            }
           }
         }, 1000);
       });
