@@ -19,26 +19,24 @@
     setupShopifyButtons();
   }
 
-  // Setup Shopify button handlers
+  // Setup Shopify button handlers - simple one-time setup
   function setupShopifyButtons() {
     const ctaShop = document.getElementById('ctaShop');
-    if (ctaShop) {
-      // Remove existing listeners to avoid duplicates
-      const newCtaShop = ctaShop.cloneNode(true);
-      ctaShop.parentNode.replaceChild(newCtaShop, ctaShop);
-      newCtaShop.addEventListener('click', (e) => {
+    if (ctaShop && !ctaShop.dataset.shopifyListener) {
+      ctaShop.dataset.shopifyListener = 'true';
+      ctaShop.addEventListener('click', function(e) {
         e.preventDefault();
+        e.stopPropagation();
         triggerShopifyModal();
       });
     }
 
     const shopRubyBtn = document.getElementById('shopRubyBtn');
-    if (shopRubyBtn) {
-      // Remove existing listeners to avoid duplicates
-      const newShopRubyBtn = shopRubyBtn.cloneNode(true);
-      shopRubyBtn.parentNode.replaceChild(newShopRubyBtn, shopRubyBtn);
-      newShopRubyBtn.addEventListener('click', (e) => {
+    if (shopRubyBtn && !shopRubyBtn.dataset.shopifyListener) {
+      shopRubyBtn.dataset.shopifyListener = 'true';
+      shopRubyBtn.addEventListener('click', function(e) {
         e.preventDefault();
+        e.stopPropagation();
         triggerShopifyModal();
       });
     }
@@ -57,108 +55,115 @@
     init();
   }
 
-  // Shopify Buy Button Triggers
+  // Shopify Buy Button Triggers - Simple one-click approach
+  let isModalTriggering = false;
+  
   function triggerShopifyModal() {
-    console.log('Triggering Shopify modal...');
+    // Prevent multiple clicks
+    if (isModalTriggering) {
+      return;
+    }
+    isModalTriggering = true;
+    
+    console.log('Opening Shopify modal...');
     
     const productComponent = document.getElementById('product-component-1768370709576');
     if (!productComponent) {
-      console.error('Shopify product component not found');
-      setTimeout(triggerShopifyModal, 500);
+      console.error('Shopify component not found');
+      isModalTriggering = false;
       return;
     }
 
-    // Function to find and click button
-    function findAndClickButton() {
-      // Try multiple selectors - component should be rendered but off-screen
+    // Make component temporarily visible so buttons can be clicked
+    // Store original inline styles
+    const originalStyles = {
+      position: productComponent.style.position || '',
+      left: productComponent.style.left || '',
+      top: productComponent.style.top || '',
+      visibility: productComponent.style.visibility || '',
+      opacity: productComponent.style.opacity || '',
+      pointerEvents: productComponent.style.pointerEvents || '',
+      width: productComponent.style.width || '',
+      height: productComponent.style.height || '',
+      zIndex: productComponent.style.zIndex || ''
+    };
+
+    // Temporarily make it visible but off-screen (so it renders properly)
+    productComponent.style.setProperty('position', 'fixed', 'important');
+    productComponent.style.setProperty('left', '0', 'important');
+    productComponent.style.setProperty('top', '0', 'important');
+    productComponent.style.setProperty('visibility', 'visible', 'important');
+    productComponent.style.setProperty('opacity', '1', 'important');
+    productComponent.style.setProperty('pointer-events', 'auto', 'important');
+    productComponent.style.setProperty('width', 'auto', 'important');
+    productComponent.style.setProperty('height', 'auto', 'important');
+    productComponent.style.setProperty('z-index', '-1', 'important');
+
+    // Wait a moment for it to render, then find and click button
+    setTimeout(() => {
+      // Try to find the button - check multiple places
+      let button = null;
+      
+      // First, try direct selectors
       const selectors = [
         '.shopify-buy__btn',
         'button.shopify-buy__btn',
         'a.shopify-buy__btn',
         '.shopify-buy__product__btn',
-        'button[data-shopify-button]',
-        '[data-shopify-modal]',
         'button',
-        'a[href*="cart"]',
-        '[role="button"]',
-        '.shopify-buy__product__buy-button',
-        '[class*="shopify-buy"] button',
-        '[class*="shopify-buy"] a'
+        'a'
       ];
-
-      // Try querySelector on component and document
+      
       for (let selector of selectors) {
-        let button = productComponent.querySelector(selector);
-        if (!button) {
-          // Also try in document in case component uses shadow DOM or iframe
-          button = document.querySelector('#product-component-1768370709576 ' + selector);
+        button = productComponent.querySelector(selector);
+        if (button && button.offsetParent !== null) {
+          break;
         }
-        
-        if (button) {
-          console.log('Found button with selector:', selector, button);
+      }
+
+      // If not found, check iframes
+      if (!button) {
+        const iframes = productComponent.querySelectorAll('iframe');
+        for (let iframe of iframes) {
           try {
-            button.click();
-            console.log('Button clicked successfully');
-            return true;
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            button = iframeDoc.querySelector('.shopify-buy__btn, button, a');
+            if (button) break;
           } catch (e) {
-            console.log('Error clicking button:', e);
+            // Cross-origin, can't access
           }
         }
       }
 
-      // Try finding by text content
-      const allElements = productComponent.querySelectorAll('*');
-      for (let el of allElements) {
-        const text = (el.textContent || '').toLowerCase().trim();
-        const tagName = el.tagName.toLowerCase();
-        if ((tagName === 'button' || tagName === 'a' || el.onclick) && 
-            (text.includes('add to cart') || text.includes('buy') || 
-             text.includes('purchase') || el.classList.toString().includes('shopify'))) {
-          console.log('Found element by content:', el, text);
-          try {
-            el.click();
-            return true;
-          } catch (e) {
-            console.log('Error clicking element:', e);
-          }
-        }
-      }
-
-      // Check for iframes
-      const iframes = productComponent.querySelectorAll('iframe');
-      for (let iframe of iframes) {
+      // Click the button if found
+      if (button) {
+        console.log('Found button, clicking...');
         try {
-          const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-          const iframeButton = iframeDoc.querySelector('button, a, [role="button"]');
-          if (iframeButton) {
-            console.log('Found button in iframe');
-            iframeButton.click();
-            return true;
-          }
+          button.click();
+          console.log('Button clicked!');
         } catch (e) {
-          console.log('Cannot access iframe (cross-origin):', e);
+          console.error('Error clicking button:', e);
         }
+      } else {
+        console.warn('Button not found');
       }
 
-      console.warn('No Shopify button found');
-      return false;
-    }
+      // Restore original styles
+      productComponent.style.removeProperty('position');
+      productComponent.style.removeProperty('left');
+      productComponent.style.removeProperty('top');
+      productComponent.style.removeProperty('visibility');
+      productComponent.style.removeProperty('opacity');
+      productComponent.style.removeProperty('pointer-events');
+      productComponent.style.removeProperty('width');
+      productComponent.style.removeProperty('height');
+      productComponent.style.removeProperty('z-index');
 
-    // Try immediately
-    if (!findAndClickButton()) {
-      // Retry with increasing delays
-      let attempts = 0;
-      const maxAttempts = 20;
-      const retryInterval = setInterval(() => {
-        attempts++;
-        if (findAndClickButton() || attempts >= maxAttempts) {
-          clearInterval(retryInterval);
-          if (attempts >= maxAttempts) {
-            console.error('Could not find Shopify button after', maxAttempts, 'attempts');
-          }
-        }
-      }, 300);
-    }
+      // Reset flag after a short delay
+      setTimeout(() => {
+        isModalTriggering = false;
+      }, 500);
+    }, 300); // Give component time to render
   }
 
   // Re-setup buttons after Shopify initializes (in case they weren't ready)

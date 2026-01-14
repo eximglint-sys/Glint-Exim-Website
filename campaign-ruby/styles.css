@@ -738,13 +738,18 @@ a {
 }
 
 #product-component-1768370709576 {
-  position: absolute !important;
+  position: fixed !important;
   left: -9999px !important;
   top: -9999px !important;
   visibility: hidden !important;
   opacity: 0 !important;
-  pointer-events: none !important;
+  /* Allow pointer events so buttons can be clicked programmatically */
+  pointer-events: auto !important;
   /* Allow component to render but keep it invisible */
+  width: auto !important;
+  height: auto !important;
+  overflow: visible !important;
+  z-index: -1 !important;
 }
 
 /* Hide Shopify cart sidebar and toggle */
@@ -760,6 +765,25 @@ a {
 /* Only show cart when it has items and is opened via modal */
 .shopify-buy__cart--is-open {
   display: block !important;
+}
+
+/* Ensure Shopify modal is visible when opened */
+.shopify-buy__modal,
+.shopify-buy__modal__overlay,
+[class*="shopify-buy__modal"] {
+  position: fixed !important;
+  z-index: 999999 !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+/* Ensure modal content is visible */
+.shopify-buy__modal__content,
+[class*="shopify-buy__modal__content"] {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 @media (max-width: 820px) {
