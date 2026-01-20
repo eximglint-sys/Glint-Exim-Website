@@ -796,10 +796,32 @@ a {
   /* Allow pointer events so buttons can be clicked programmatically */
   pointer-events: auto !important;
   /* Allow component to render but keep it invisible */
-  width: auto !important;
-  height: auto !important;
-  overflow: visible !important;
+  width: 0 !important;
+  height: 0 !important;
+  max-width: 0 !important;
+  max-height: 0 !important;
+  overflow: hidden !important;
   z-index: -1 !important;
+}
+
+/* Hide all Shopify product images and content in the hidden component */
+#product-component-1768370709576 > *:not(.shopify-buy__modal):not([class*="shopify-buy__modal"]) {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+/* Hide product images specifically */
+#product-component-1768370709576 .shopify-buy__product,
+#product-component-1768370709576 .shopify-buy__product__wrapper,
+#product-component-1768370709576 .shopify-buy__product__images,
+#product-component-1768370709576 .shopify-buy__product__image,
+#product-component-1768370709576 img {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
 /* Hide Shopify cart sidebar and toggle */
@@ -826,6 +848,33 @@ a {
   visibility: visible !important;
   opacity: 1 !important;
   pointer-events: auto !important;
+  /* Ensure modal appears on top and covers everything */
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+}
+
+/* Hide any product images or content that might show in background */
+.shopify-buy__product,
+.shopify-buy__product__wrapper,
+.shopify-buy__product__images,
+.shopify-buy__product__image {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+/* But show product images inside modal */
+.shopify-buy__modal .shopify-buy__product,
+.shopify-buy__modal .shopify-buy__product__wrapper,
+.shopify-buy__modal .shopify-buy__product__images,
+.shopify-buy__modal .shopify-buy__product__image {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 /* Ensure modal content is visible */
