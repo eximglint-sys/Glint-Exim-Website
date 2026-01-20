@@ -218,6 +218,49 @@
   // Setup floating button scroll handler
   setupFloatingButton();
 
+  // Auto-play video when unboxing section comes into view
+  function setupVideoAutoplay() {
+    const video = document.getElementById('unboxingVideo');
+    const videoSection = document.getElementById('video');
+    
+    if (!video || !videoSection) return;
+
+    let hasPlayed = false; // Prevent replaying if user scrolls back
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !hasPlayed) {
+          // Video is in viewport, try to play
+          const playPromise = video.play();
+          
+          if (playPromise !== undefined) {
+            playPromise.then(() => {
+              console.log('Video autoplay started');
+              hasPlayed = true;
+            }).catch(error => {
+              console.log('Autoplay prevented by browser:', error);
+              // If autoplay fails (due to browser policy), user can click to play
+            });
+          }
+        } else if (!entry.isIntersecting && hasPlayed) {
+          // Video is out of viewport, pause it
+          video.pause();
+        }
+      });
+    }, {
+      threshold: 0.5 // Trigger when 50% of video is visible
+    });
+
+    observer.observe(videoSection);
+  }
+
+  // Initialize video autoplay after DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupVideoAutoplay);
+  } else {
+    setupVideoAutoplay();
+  }
+
   // Re-setup buttons after Shopify initializes (in case they weren't ready)
   if (window.shopifyUI || document.getElementById('product-component-1768370709576')) {
     setTimeout(setupShopifyButtons, 2000);
