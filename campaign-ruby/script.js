@@ -55,6 +55,40 @@
     } else {
       console.warn('Shop Ruby button not found!');
     }
+
+    // Setup floating button
+    const floatingShopBtn = document.getElementById('floatingShopRubyBtn');
+    if (floatingShopBtn && !floatingShopBtn.dataset.shopifyListener) {
+      floatingShopBtn.dataset.shopifyListener = 'true';
+      floatingShopBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('Floating Shop Ruby button clicked');
+        triggerShopifyModal();
+      });
+      console.log('Floating Shop Ruby button listener added');
+    }
+  }
+
+  // Show/hide floating button on scroll
+  function setupFloatingButton() {
+    const floatingBtn = document.getElementById('floatingShopBtn');
+    if (!floatingBtn) return;
+
+    let lastScrollTop = 0;
+    const scrollThreshold = 200; // Show after scrolling 200px
+
+    window.addEventListener('scroll', function() {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      
+      if (scrollTop > scrollThreshold) {
+        floatingBtn.classList.add('visible');
+      } else {
+        floatingBtn.classList.remove('visible');
+      }
+      
+      lastScrollTop = scrollTop;
+    }, false);
   }
 
   // Listen for Shopify ready event
@@ -180,6 +214,9 @@
       }, 500);
     }, 300); // Give component time to render
   }
+
+  // Setup floating button scroll handler
+  setupFloatingButton();
 
   // Re-setup buttons after Shopify initializes (in case they weren't ready)
   if (window.shopifyUI || document.getElementById('product-component-1768370709576')) {
