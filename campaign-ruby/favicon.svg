@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="rubyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8b000f;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5e0009;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- Ruby gem shape -->
+  <path d="M50 10 L70 25 L70 55 L50 70 L30 55 L30 25 Z" fill="url(#rubyGrad)" stroke="#d8aa3a" stroke-width="1.5"/>
+  <path d="M50 10 L50 70 M30 25 L70 25 M30 55 L70 55" stroke="#d8aa3a" stroke-width="0.5" opacity="0.6"/>
+  <!-- Highlight -->
+  <ellipse cx="45" cy="30" rx="8" ry="12" fill="#ff6b6b" opacity="0.4"/>
+</svg>
+
