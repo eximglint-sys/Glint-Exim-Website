@@ -116,8 +116,12 @@
     
     console.log('Opening Shopify modal...');
     
+    // Try product component first (original), then collection component
     const productComponent = document.getElementById('product-component-1768370709576');
-    if (!productComponent) {
+    const collectionComponent = document.getElementById('collection-component-1769582114770');
+    const component = productComponent || collectionComponent;
+    
+    if (!component) {
       console.error('Shopify component not found');
       isModalTriggering = false;
       return;
@@ -126,27 +130,29 @@
     // Make component temporarily visible so buttons can be clicked
     // Store original inline styles
     const originalStyles = {
-      position: productComponent.style.position || '',
-      left: productComponent.style.left || '',
-      top: productComponent.style.top || '',
-      visibility: productComponent.style.visibility || '',
-      opacity: productComponent.style.opacity || '',
-      pointerEvents: productComponent.style.pointerEvents || '',
-      width: productComponent.style.width || '',
-      height: productComponent.style.height || '',
-      zIndex: productComponent.style.zIndex || ''
+      position: component.style.position || '',
+      left: component.style.left || '',
+      top: component.style.top || '',
+      visibility: component.style.visibility || '',
+      opacity: component.style.opacity || '',
+      pointerEvents: component.style.pointerEvents || '',
+      width: component.style.width || '',
+      height: component.style.height || '',
+      zIndex: component.style.zIndex || ''
     };
 
-    // Temporarily make it visible but off-screen (so it renders properly)
-    productComponent.style.setProperty('position', 'fixed', 'important');
-    productComponent.style.setProperty('left', '0', 'important');
-    productComponent.style.setProperty('top', '0', 'important');
-    productComponent.style.setProperty('visibility', 'visible', 'important');
-    productComponent.style.setProperty('opacity', '1', 'important');
-    productComponent.style.setProperty('pointer-events', 'auto', 'important');
-    productComponent.style.setProperty('width', 'auto', 'important');
-    productComponent.style.setProperty('height', 'auto', 'important');
-    productComponent.style.setProperty('z-index', '-1', 'important');
+    // Temporarily make it visible but off-screen (so it renders properly for Shopify)
+    // This allows Shopify to render the component and open the cart sidebar
+    component.style.removeProperty('display');
+    component.style.setProperty('position', 'fixed', 'important');
+    component.style.setProperty('left', '-9999px', 'important');
+    component.style.setProperty('top', '0', 'important');
+    component.style.setProperty('visibility', 'visible', 'important');
+    component.style.setProperty('opacity', '1', 'important');
+    component.style.setProperty('pointer-events', 'auto', 'important');
+    component.style.setProperty('width', 'auto', 'important');
+    component.style.setProperty('height', 'auto', 'important');
+    component.style.setProperty('z-index', '9999', 'important');
 
     // Wait a moment for it to render, then find and click button
     setTimeout(() => {
@@ -164,7 +170,7 @@
       ];
       
       for (let selector of selectors) {
-        button = productComponent.querySelector(selector);
+        button = component.querySelector(selector);
         if (button && button.offsetParent !== null) {
           break;
         }
@@ -172,7 +178,7 @@
 
       // If not found, check iframes
       if (!button) {
-        const iframes = productComponent.querySelectorAll('iframe');
+        const iframes = component.querySelectorAll('iframe');
         for (let iframe of iframes) {
           try {
             const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
@@ -197,16 +203,17 @@
         console.warn('Button not found');
       }
 
-      // Restore original styles
-      productComponent.style.removeProperty('position');
-      productComponent.style.removeProperty('left');
-      productComponent.style.removeProperty('top');
-      productComponent.style.removeProperty('visibility');
-      productComponent.style.removeProperty('opacity');
-      productComponent.style.removeProperty('pointer-events');
-      productComponent.style.removeProperty('width');
-      productComponent.style.removeProperty('height');
-      productComponent.style.removeProperty('z-index');
+      // Restore hidden state after button click (cart sidebar should be open now)
+      component.style.setProperty('visibility', 'hidden', 'important');
+      component.style.setProperty('position', 'absolute', 'important');
+      component.style.setProperty('left', '-9999px', 'important');
+      component.style.setProperty('top', '-9999px', 'important');
+      component.style.setProperty('width', '1px', 'important');
+      component.style.setProperty('height', '1px', 'important');
+      component.style.setProperty('overflow', 'hidden', 'important');
+      component.style.removeProperty('opacity');
+      component.style.removeProperty('pointer-events');
+      component.style.removeProperty('z-index');
 
       // Reset flag after a short delay
       setTimeout(() => {
@@ -262,7 +269,7 @@
   }
 
   // Re-setup buttons after Shopify initializes (in case they weren't ready)
-  if (window.shopifyUI || document.getElementById('product-component-1768370709576')) {
+  if (window.shopifyUI || document.getElementById('product-component-1768370709576') || document.getElementById('collection-component-1769582114770')) {
     setTimeout(setupShopifyButtons, 2000);
   }
   
@@ -275,5 +282,310 @@
   // Make functions globally available for debugging
   window.setupShopifyButtons = setupShopifyButtons;
   window.triggerShopifyModal = triggerShopifyModal;
+
+  // Product Modal Functionality
+  const productDescriptions = {
+    'ruby': {
+      title: 'Natural Pear-Cut Ruby Gemstone',
+      description: 'Discover the timeless power and elegance of this Natural Pear-Cut Ruby Gemstone, sourced directly from the rich ruby mines of Mozambique. This gemstone is 100% natural ruby, prized for its deep red hue, excellent clarity, and finely executed faceted finish that enhances its brilliance and fire. The graceful pear cut adds sophistication, making it ideal for premium rings, pendants, or bespoke jewelry creations.<br><br>Beyond its beauty, this ruby carries profound spiritual significance. It has been Om Mantra enchanted, a sacred Vedic process believed to activate positive vibrations, inner strength, confidence, and vitality. Blessed with divine energies, this gemstone is traditionally associated with courage, leadership, prosperity, and protection from negative influences.<br><br>Each stone is carefully selected to ensure authenticity, purity, and superior quality. Whether worn for its astrological benefits, spiritual value, or luxurious appeal, this Mozambique ruby is a powerful symbol of passion, success, and divine blessings—perfect for those who seek both beauty and meaning in a precious gemstone.'
+    },
+    'ganesh': {
+      title: 'Divine 40 Carat Natural Ruby Ganesh Ji',
+      description: 'This Divine 40 Carat Natural Ruby Ganesh Ji is a rare fusion of spirituality and natural beauty. Expertly hand-cut from a genuine ruby, the idol showcases intricate detailing that reflects skilled craftsmanship and devotion. The rich red hue and natural inclusions highlight the stone\'s authenticity and uniqueness. Revered as the remover of obstacles and the harbinger of prosperity, Ganesh Ji makes this sacred gem ideal for worship, collection, or gifting. Perfect for those seeking spiritual energy, elegance, and exclusivity, this exquisite ruby idol embodies devotion, positivity, and timeless value.'
+    }
+  };
+
+  function openProductModal(productType) {
+    const modal = document.getElementById('productModal');
+    const titleEl = document.getElementById('modalTitle');
+    const descEl = document.getElementById('modalDescription');
+    
+    if (!modal || !productDescriptions[productType]) return;
+    
+    const product = productDescriptions[productType];
+    titleEl.textContent = product.title;
+    descEl.innerHTML = product.description;
+    
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+  }
+
+  function closeProductModal() {
+    const modal = document.getElementById('productModal');
+    if (modal) {
+      modal.classList.remove('active');
+      document.body.style.overflow = ''; // Restore scrolling
+    }
+  }
+
+  // Setup modal close handlers
+  function setupProductModal() {
+    const closeBtn = document.getElementById('closeModal');
+    const modal = document.getElementById('productModal');
+    
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeProductModal);
+    }
+    
+    if (modal) {
+      // Close on overlay click
+      const overlay = modal.querySelector('.product-modal-overlay');
+      if (overlay) {
+        overlay.addEventListener('click', closeProductModal);
+      }
+      
+      // Close on Escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+          closeProductModal();
+        }
+      });
+    }
+  }
+
+  // Setup product click handlers - make product titles clickable
+  function setupProductClicks() {
+    const collectionComponent = document.getElementById('collection-component-1769582114770');
+    if (!collectionComponent) {
+      console.log('Collection component not found');
+      return;
+    }
+
+    console.log('Setting up product title clicks...');
+    
+    // Function to find and make product titles clickable
+    function makeTitlesClickable() {
+      // Find all text nodes and elements
+      const walker = document.createTreeWalker(
+        collectionComponent,
+        NodeFilter.SHOW_TEXT | NodeFilter.SHOW_ELEMENT,
+        null,
+        false
+      );
+      
+      let rubyFound = false;
+      let ganeshFound = false;
+      let node;
+      
+      while (node = walker.nextNode()) {
+        if (node.nodeType === Node.TEXT_NODE) {
+          const text = node.textContent.trim();
+          const parent = node.parentElement;
+          
+          // Check for Ruby product title
+          if (text.includes('Natural Pear-Cut Ruby Gemstone') && !rubyFound && parent) {
+            // Find the best parent element to make clickable
+            let clickableElement = parent;
+            
+            // Walk up to find a better container (heading, div with title class, etc.)
+            let current = parent;
+            for (let i = 0; i < 5 && current; i++) {
+              const tag = current.tagName;
+              const classes = current.classList ? current.classList.toString().toLowerCase() : '';
+              
+              if (tag.match(/^H[1-6]$/) || 
+                  classes.includes('title') || 
+                  classes.includes('name') ||
+                  classes.includes('product')) {
+                clickableElement = current;
+                break;
+              }
+              current = current.parentElement;
+            }
+            
+            // Make it clickable
+            if (clickableElement && !clickableElement.dataset.rubyClickHandler) {
+              clickableElement.dataset.rubyClickHandler = 'true';
+              clickableElement.style.cursor = 'pointer';
+              clickableElement.style.textDecoration = 'underline';
+              clickableElement.style.textDecorationColor = 'rgba(216, 170, 58, 0.5)';
+              clickableElement.style.transition = 'all 0.2s ease';
+              
+              clickableElement.addEventListener('click', function(e) {
+                if (e.target.closest('button') || e.target.closest('a[class*="btn"]')) {
+                  return;
+                }
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('Ruby title clicked!');
+                openProductModal('ruby');
+              });
+              
+              console.log('Made Ruby title clickable');
+              rubyFound = true;
+            }
+          }
+          
+          // Check for Ganesh product title
+          if ((text.includes('Ganesh') || text.includes('Ganesh Ji')) && !ganeshFound && parent) {
+            let clickableElement = parent;
+            
+            // Walk up to find a better container
+            let current = parent;
+            for (let i = 0; i < 5 && current; i++) {
+              const tag = current.tagName;
+              const classes = current.classList ? current.classList.toString().toLowerCase() : '';
+              
+              if (tag.match(/^H[1-6]$/) || 
+                  classes.includes('title') || 
+                  classes.includes('name') ||
+                  classes.includes('product')) {
+                clickableElement = current;
+                break;
+              }
+              current = current.parentElement;
+            }
+            
+            // Make it clickable
+            if (clickableElement && !clickableElement.dataset.ganeshClickHandler) {
+              clickableElement.dataset.ganeshClickHandler = 'true';
+              clickableElement.style.cursor = 'pointer';
+              clickableElement.style.textDecoration = 'underline';
+              clickableElement.style.textDecorationColor = 'rgba(216, 170, 58, 0.5)';
+              clickableElement.style.transition = 'all 0.2s ease';
+              
+              clickableElement.addEventListener('click', function(e) {
+                if (e.target.closest('button') || e.target.closest('a[class*="btn"]')) {
+                  return;
+                }
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('Ganesh title clicked!');
+                openProductModal('ganesh');
+              });
+              
+              console.log('Made Ganesh title clickable');
+              ganeshFound = true;
+            }
+          }
+        }
+      }
+      
+      // Also try event delegation on the entire collection component
+      if (!collectionComponent.dataset.delegationHandler) {
+        collectionComponent.dataset.delegationHandler = 'true';
+        collectionComponent.addEventListener('click', function(e) {
+          // Don't trigger on buttons
+          if (e.target.closest('button') || e.target.closest('a[class*="btn"]')) {
+            return;
+          }
+          
+          // Get the clicked element and walk up to find product container
+          let element = e.target;
+          let depth = 0;
+          
+          while (element && depth < 10) {
+            const text = element.textContent || '';
+            
+            // Check if this element contains Ruby product text
+            if (text.includes('Natural Pear-Cut Ruby Gemstone') || 
+                (text.includes('Pear-Cut Ruby') && text.includes('Deep Red'))) {
+              e.preventDefault();
+              e.stopPropagation();
+              console.log('Ruby product clicked via delegation');
+              openProductModal('ruby');
+              return;
+            }
+            
+            // Check if this element contains Ganesh product text
+            if (text.includes('Ganesh Ji') || 
+                (text.includes('Ganesh') && text.includes('Carat'))) {
+              e.preventDefault();
+              e.stopPropagation();
+              console.log('Ganesh product clicked via delegation');
+              openProductModal('ganesh');
+              return;
+            }
+            
+            element = element.parentElement;
+            depth++;
+          }
+        }, true); // Use capture phase
+        console.log('Event delegation handler attached');
+      }
+      
+      console.log('Ruby clickable:', rubyFound, 'Ganesh clickable:', ganeshFound);
+    }
+    
+    // Try making titles clickable immediately
+    makeTitlesClickable();
+    
+    // Use MutationObserver to watch for dynamically added content
+    const observer = new MutationObserver(function(mutations) {
+      let hasNewContent = false;
+      mutations.forEach(function(mutation) {
+        if (mutation.addedNodes.length > 0) {
+          hasNewContent = true;
+        }
+      });
+      if (hasNewContent) {
+        setTimeout(makeTitlesClickable, 500);
+      }
+    });
+
+    observer.observe(collectionComponent, {
+      childList: true,
+      subtree: true
+    });
+    
+    // Retry periodically to catch titles that load later
+    let retryCount = 0;
+    const maxRetries = 15;
+    const retryInterval = setInterval(function() {
+      makeTitlesClickable();
+      
+      // Check if we found both titles
+      const rubyElement = collectionComponent.querySelector('[data-ruby-click-handler="true"]');
+      const ganeshElement = collectionComponent.querySelector('[data-ganesh-click-handler="true"]');
+      
+      if ((rubyElement && ganeshElement) || retryCount >= maxRetries) {
+        clearInterval(retryInterval);
+        if (rubyElement && ganeshElement) {
+          console.log('Both product titles are now clickable!');
+        }
+      }
+      retryCount++;
+    }, 1000);
+  }
+
+  // Initialize modal
+  setupProductModal();
+  
+  // Wait for Shopify collection to render, then setup clicks
+  setTimeout(function() {
+    setupProductClicks();
+  }, 3000);
+  
+  // Also try after window load
+  window.addEventListener('load', function() {
+    setTimeout(setupProductClicks, 4000);
+  });
+  
+  // Listen for Shopify ready event
+  window.addEventListener('shopifyReady', function() {
+    setTimeout(setupProductClicks, 2000);
+  });
+  
+  // Retry periodically until products are found
+  let retryCount = 0;
+  const maxRetries = 10;
+  const retryInterval = setInterval(function() {
+    const collectionComponent = document.getElementById('collection-component-1769582114770');
+    if (collectionComponent) {
+      const products = collectionComponent.querySelectorAll('.shopify-buy__product, [class*="shopify-buy__product"], [class*="product"]');
+      if (products.length > 0 || retryCount >= maxRetries) {
+        clearInterval(retryInterval);
+        if (products.length > 0) {
+          console.log('Products found, setting up clicks');
+          setupProductClicks();
+        }
+      }
+    }
+    retryCount++;
+  }, 1000);
+
+  // Make modal functions globally available
+  window.openProductModal = openProductModal;
+  window.closeProductModal = closeProductModal;
 })();
 

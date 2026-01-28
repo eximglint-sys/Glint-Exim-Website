@@ -256,6 +256,19 @@
         </div>
       </section>
 
+      <!-- Products Collection Section -->
+      <section class="section products-collection" id="products">
+        <div class="section-head">
+          <p class="eyebrow">Our Collection</p>
+          <h2>Browse Our Ruby Collection</h2>
+          <p>Explore our complete range of 100% natural rubies</p>
+        </div>
+        <div class="collection-wrapper">
+          <!-- Shopify Collection Component - Visible for browsing -->
+          <div id='collection-component-1769582114770'></div>
+        </div>
+      </section>
+
       <section class="section cta" id="cta">
         <div class="cta-card">
           <div>
@@ -332,8 +345,22 @@
     <button id="floatingShopRubyBtn">Shop Ruby</button>
   </div>
 
-  <!-- Shopify Buy Button Component -->
-  <div id='product-component-1768370709576'></div>
+  <!-- Product Details Modal -->
+  <div class="product-modal" id="productModal">
+    <div class="product-modal-overlay"></div>
+    <div class="product-modal-content">
+      <button class="product-modal-close" id="closeModal" aria-label="Close modal">
+        <i class="fas fa-times"></i>
+      </button>
+      <div class="product-modal-body">
+        <h2 class="product-modal-title" id="modalTitle"></h2>
+        <div class="product-modal-description" id="modalDescription"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shopify Product Component (Original) - Hidden from view, shown in sidebar/modal when triggered -->
+  <div id='product-component-1768370709576' style="visibility: hidden; position: absolute; left: -9999px; top: -9999px; width: 1px; height: 1px; overflow: hidden;"></div>
 
   <script type="text/javascript">
   /*<![CDATA[*/
@@ -361,6 +388,7 @@
         storefrontAccessToken: '24f9545ee81a1702a55296a581ccdfb0',
       });
       ShopifyBuy.UI.onReady(client).then(function (ui) {
+        // Create Product Component (Original)
         ui.createComponent('product', {
           id: '10208663765309',
           node: document.getElementById('product-component-1768370709576'),
@@ -432,18 +460,93 @@
             }
           },
         });
+
+        // Create Collection Component
+        ui.createComponent('collection', {
+          id: '537409585469',
+          node: document.getElementById('collection-component-1769582114770'),
+          moneyFormat: 'Rs.%20%7B%7Bamount%7D%7D',
+          options: {
+            "product": {
+              "styles": {
+                "product": {
+                  "@media (min-width: 601px)": {
+                    "max-width": "calc(25% - 20px)",
+                    "margin-left": "20px",
+                    "margin-bottom": "50px",
+                    "width": "calc(25% - 20px)"
+                  },
+                  "img": {
+                    "height": "calc(100% - 15px)",
+                    "position": "absolute",
+                    "left": "0",
+                    "right": "0",
+                    "top": "0"
+                  },
+                  "imgWrapper": {
+                    "padding-top": "calc(75% + 15px)",
+                    "position": "relative",
+                    "height": "0"
+                  }
+                }
+              },
+              "text": {
+                "button": "Add to cart"
+              }
+            },
+            "productSet": {
+              "styles": {
+                "products": {
+                  "@media (min-width: 601px)": {
+                    "margin-left": "-20px"
+                  }
+                }
+              }
+            },
+            "modalProduct": {
+              "contents": {
+                "img": false,
+                "imgWithCarousel": true,
+                "button": false,
+                "buttonWithQuantity": true
+              },
+              "styles": {
+                "product": {
+                  "@media (min-width: 601px)": {
+                    "max-width": "100%",
+                    "margin-left": "0px",
+                    "margin-bottom": "0px"
+                  }
+                }
+              },
+              "text": {
+                "button": "Add to cart"
+              }
+            },
+            "option": {},
+            "cart": {
+              "text": {
+                "total": "Subtotal",
+                "button": "Checkout"
+              }
+            },
+            "toggle": {}
+          },
+        });
         
         // Store UI instance globally for button triggers
         window.shopifyUI = ui;
         window.shopifyClient = client;
         
-        // Wait a bit for component to render, then store reference
+        // Wait a bit for components to render, then store reference
         setTimeout(function() {
           const productComponent = document.getElementById('product-component-1768370709576');
-          if (productComponent) {
+          const collectionComponent = document.getElementById('collection-component-1769582114770');
+          if (productComponent || collectionComponent) {
             window.shopifyProductComponent = productComponent;
+            window.shopifyCollectionComponent = collectionComponent;
             window.shopifyReady = true;
-            console.log('Shopify component initialized');
+            console.log('Shopify components initialized');
             
             // Trigger custom event to notify that Shopify is ready
             if (typeof window.dispatchEvent !== 'undefined') {
@@ -466,6 +569,7 @@
       console.log('Shopify UI available:', !!window.shopifyUI);
       console.log('Shopify ready:', !!window.shopifyReady);
       console.log('Product component exists:', !!document.getElementById('product-component-1768370709576'));
+      console.log('Collection component exists:', !!document.getElementById('collection-component-1769582114770'));
       
       // Check if buttons exist
       const shopBtn = document.getElementById('shopRubyBtn');
