@@ -225,51 +225,122 @@
   // Setup floating button scroll handler
   setupFloatingButton();
 
-  // Auto-play video when unboxing section comes into view
-  function setupVideoAutoplay() {
-    const video = document.getElementById('unboxingVideo');
-    const videoSection = document.getElementById('video');
-    
-    if (!video || !videoSection) return;
+  // Video Carousel
+  function setupVideoCarousel() {
+    const carousel = document.querySelector('.video-carousel');
+    if (!carousel) return;
 
-    let hasPlayed = false;
+    const slides = carousel.querySelectorAll('.video-slide');
+    const videos = carousel.querySelectorAll('.carousel-video');
+    const prevBtn = carousel.querySelector('.video-carousel-prev');
+    const nextBtn = carousel.querySelector('.video-carousel-next');
+    const indicators = carousel.querySelectorAll('.video-indicator');
+
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+
+    function goToSlide(index) {
+      if (index < 0) index = totalSlides - 1;
+      if (index >= totalSlides) index = 0;
+      currentIndex = index;
+
+      // Pause all videos
+      videos.forEach(v => {
+        v.pause();
+      });
+
+      // Update slides
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === currentIndex);
+      });
+
+      // Update indicators
+      indicators.forEach((ind, i) => {
+        ind.classList.toggle('active', i === currentIndex);
+      });
+
+      // Play active slide video when section is in view
+      const activeVideo = videos[currentIndex];
+      if (activeVideo) {
+        activeVideo.muted = true;
+        activeVideo.play().catch(function() {});
+      }
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function() {
+        goToSlide(currentIndex - 1);
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function() {
+        goToSlide(currentIndex + 1);
+      });
+    }
+    indicators.forEach((ind, i) => {
+      ind.addEventListener('click', function() {
+        goToSlide(i);
+      });
+    });
+
+    // When a video ends, automatically go to the next video
+    videos.forEach(function(video) {
+      video.addEventListener('ended', function() {
+        goToSlide(currentIndex + 1);
+      });
+    });
+
+    window.videoCarouselGoToSlide = goToSlide;
+  }
+
+  // Auto-play active carousel video when section comes into view
+  function setupVideoAutoplay() {
+    const videoSection = document.getElementById('video');
+    const carousel = document.querySelector('.video-carousel');
+    
+    if (!videoSection) return;
+
+    const videos = document.querySelectorAll('.carousel-video');
+    const slides = document.querySelectorAll('.video-slide');
+    let sectionInView = false;
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
+        sectionInView = entry.isIntersecting;
+
         if (entry.isIntersecting) {
-          // Video section is in viewport - play automatically
-          if (!hasPlayed) {
-            video.muted = true; // Ensure muted (required for autoplay in most browsers)
-            const playPromise = video.play();
-            
-            if (playPromise !== undefined) {
-              playPromise.then(() => {
-                hasPlayed = true;
-              }).catch(function(err) {
-                console.log('Video autoplay prevented:', err);
-              });
+          // Find active slide and play its video
+          const activeSlide = document.querySelector('.video-slide.active');
+          if (activeSlide) {
+            const video = activeSlide.querySelector('.carousel-video');
+            if (video) {
+              video.muted = true;
+              video.play().catch(function() {});
             }
           }
         } else {
-          // Video section is out of viewport - pause to save resources
-          if (hasPlayed) {
-            video.pause();
-          }
+          // Pause all videos when section is out of view
+          videos.forEach(v => v.pause());
         }
       });
     }, {
-      threshold: 0.25,  // Start playing when 25% of section is visible
+      threshold: 0.25,
       rootMargin: '0px'
     });
 
     observer.observe(videoSection);
   }
 
-  // Initialize video autoplay after DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', setupVideoAutoplay);
-  } else {
+  // Initialize video carousel and autoplay after DOM is ready
+  function initVideoSection() {
+    setupVideoCarousel();
     setupVideoAutoplay();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initVideoSection);
+  } else {
+    initVideoSection();
   }
 
   // Re-setup buttons after Shopify initializes (in case they weren't ready)
@@ -281,7 +352,7 @@
   window.addEventListener('load', function() {
     console.log('Window load event - setting up buttons');
     setTimeout(setupShopifyButtons, 1500);
-    setTimeout(setupVideoAutoplay, 500); // Ensure video autoplay is set up after full load
+    setTimeout(initVideoSection, 500); // Ensure video carousel and autoplay are set up after full load
   });
   
   // Make functions globally available for debugging

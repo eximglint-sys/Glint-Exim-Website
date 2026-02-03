@@ -91,14 +91,40 @@
       <section class="section video" id="video">
         <div class="section-head">
           <p class="eyebrow">Experience</p>
-          <h2>Watch the Ruby Unboxing</h2>
+          <h2>Watch Our Videos</h2>
           <p>See the fire, clarity, and luster of our handpicked stones.</p>
         </div>
-        <div class="video-frame">
-          <video id="unboxingVideo" controls muted playsinline poster="../lp/images/ruby.jpeg" preload="auto" style="width: 100%; height: 100%; border-radius: var(--radius);">
-            <source src="../lp/images/unboxing_video.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
+        <div class="video-carousel">
+          <button class="video-carousel-prev" type="button" aria-label="Previous video">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="video-carousel-next" type="button" aria-label="Next video">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+          <div class="video-carousel-inner">
+            <div class="video-slide active">
+              <div class="video-frame">
+                <video class="carousel-video" data-video="0" controls muted playsinline poster="../lp/images/ruby.jpeg" preload="auto">
+                  <source src="../lp/images/unboxing_video.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+              <p class="video-slide-caption">Ruby Unboxing</p>
+            </div>
+            <div class="video-slide">
+              <div class="video-frame">
+                <video class="carousel-video" data-video="1" controls muted playsinline poster="../lp/images/ruby.jpeg" preload="metadata">
+                  <source src="../lp/images/cards.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+              <p class="video-slide-caption">Cards</p>
+            </div>
+          </div>
+          <div class="video-carousel-indicators">
+            <button type="button" class="video-indicator active" data-slide="0" aria-label="Video 1"></button>
+            <button type="button" class="video-indicator" data-slide="1" aria-label="Video 2"></button>
+          </div>
         </div>
       </section>
 
