@@ -232,30 +232,34 @@
     
     if (!video || !videoSection) return;
 
-    let hasPlayed = false; // Prevent replaying if user scrolls back
+    let hasPlayed = false;
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting && !hasPlayed) {
-          // Video is in viewport, try to play
-          const playPromise = video.play();
-          
-          if (playPromise !== undefined) {
-            playPromise.then(() => {
-              console.log('Video autoplay started');
-              hasPlayed = true;
-            }).catch(error => {
-              console.log('Autoplay prevented by browser:', error);
-              // If autoplay fails (due to browser policy), user can click to play
-            });
+        if (entry.isIntersecting) {
+          // Video section is in viewport - play automatically
+          if (!hasPlayed) {
+            video.muted = true; // Ensure muted (required for autoplay in most browsers)
+            const playPromise = video.play();
+            
+            if (playPromise !== undefined) {
+              playPromise.then(() => {
+                hasPlayed = true;
+              }).catch(function(err) {
+                console.log('Video autoplay prevented:', err);
+              });
+            }
           }
-        } else if (!entry.isIntersecting && hasPlayed) {
-          // Video is out of viewport, pause it
-          video.pause();
+        } else {
+          // Video section is out of viewport - pause to save resources
+          if (hasPlayed) {
+            video.pause();
+          }
         }
       });
     }, {
-      threshold: 0.5 // Trigger when 50% of video is visible
+      threshold: 0.25,  // Start playing when 25% of section is visible
+      rootMargin: '0px'
     });
 
     observer.observe(videoSection);
@@ -277,6 +281,7 @@
   window.addEventListener('load', function() {
     console.log('Window load event - setting up buttons');
     setTimeout(setupShopifyButtons, 1500);
+    setTimeout(setupVideoAutoplay, 500); // Ensure video autoplay is set up after full load
   });
   
   // Make functions globally available for debugging
