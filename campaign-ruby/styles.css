@@ -1029,6 +1029,33 @@ a {
   transform: translateY(-2px);
 }
 
+/* Instagram Floating Button */
+.instagram-float {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 100px;
+  right: 30px;
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  color: white;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 28px;
+  box-shadow: 0 5px 20px rgba(225, 48, 108, 0.5);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none;
+}
+
+.instagram-float:hover {
+  transform: scale(1.15);
+  box-shadow: 0 8px 25px rgba(225, 48, 108, 0.7);
+  text-decoration: none;
+}
+
 /* WhatsApp Floating Button */
 .whatsapp-float {
   position: fixed;
@@ -1240,6 +1267,14 @@ a {
     font-size: 16px;
     min-width: 180px;
     width: auto;
+  }
+
+  .instagram-float {
+    width: 50px;
+    height: 50px;
+    font-size: 22px;
+    bottom: 80px;
+    right: 20px;
   }
 
   .whatsapp-float {
